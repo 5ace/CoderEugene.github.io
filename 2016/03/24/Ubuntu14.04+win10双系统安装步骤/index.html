@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ubuntu安装,虚拟机,双系统," />
 
 
 
@@ -57,12 +57,12 @@
 
 
 
-<meta name="description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程，也算是个人总结，希望能有些帮助！">
+<meta name="description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu14.04+win10双系统安装步骤">
 <meta property="og:url" content="http://yoursite.com/2016/03/24/Ubuntu14.04+win10双系统安装步骤/index.html">
 <meta property="og:site_name" content="EUAdvancer">
-<meta property="og:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程，也算是个人总结，希望能有些帮助！">
+<meta property="og:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu01.png">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu02.png">
@@ -70,10 +70,14 @@
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu04.png">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu05.png">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu06.png">
-<meta property="og:updated_time" content="2016-03-25T15:22:02.470Z">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu07.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu08.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu09.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu10.png">
+<meta property="og:updated_time" content="2016-03-26T06:08:17.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu14.04+win10双系统安装步骤">
-<meta name="twitter:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程，也算是个人总结，希望能有些帮助！">
+<meta name="twitter:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
 <meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg">
 
 
@@ -260,6 +264,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">Ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -288,7 +311,7 @@
       
 
       
-        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg" alt="bg"><br>由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程，也算是个人总结，希望能有些帮助！<br><a id="more"></a></p>
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg" alt="bg"><br>由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！<br><a id="more"></a></p>
 <h3 id="下载Ubuntu"><a href="#下载Ubuntu" class="headerlink" title="下载Ubuntu"></a>下载Ubuntu</h3><p>选择14的版本其实是为了稳定一些，不过在安装过程中还是出了许多问题。。</p>
 <ul>
 <li><a href="http://www.ubuntu.com/download/desktop" target="_blank" rel="external">Ubuntu 14.04.4</a><br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu01.png" alt="ubuntu"></li>
@@ -328,9 +351,34 @@
 <li>这大概是高版本内核问题，我的解决办法是在进入ubuntu时选择高级模式，选了一个较低版本就可以了</li>
 </ul>
 </li>
-<li>关机时卡死<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这是我网上找来的，并且解决了问题，以下：</span><br><span class="line"></span><br><span class="line">使用超级用户，或者在指令前加上sudo</span><br><span class="line"></span><br><span class="line"><span class="comment">#vi  /etc/modules，在文件的末尾添加：apm power_off=1</span></span><br><span class="line"><span class="comment">#vi  /boot/grub/grub.cfg</span></span><br><span class="line">找到下面内容：</span><br><span class="line"> </span><br><span class="line">inux --class gnu --class os &#123;</span><br><span class="line">     recordfail</span><br><span class="line">     gfxmode <span class="variable">$linux_gfx_mode</span></span><br><span class="line">     insmod gzio</span><br><span class="line">     insmod part_msdos</span><br><span class="line">     insmod ext2</span><br><span class="line">     <span class="built_in">set</span> root=<span class="string">'(hd0,msdos11)'</span></span><br><span class="line">     search --no-floppy --fs-uuid --set=root ed532c1f-b89a-470c-ad6f-539a3f04b993</span><br><span class="line">     linux   /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=ed532c1f-b89a-470c-ad6f-539a3f04b993 ro   quiet splash <span class="variable">$vt_handoff</span> acpi=force</span><br><span class="line">     initrd  /boot/initrd.img-3.2.0-24-generic-pae</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">操作就是加上acpi=force强制保证并退出。</span><br></pre></td></tr></table></figure>
+<li>关机时卡死<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> 这是我网上找来的，并且解决了问题，以下：</span><br><span class="line"></span><br><span class="line">使用超级用户，或者在指令前加上sudo</span><br><span class="line"></span><br><span class="line"><span class="comment">#vi  /etc/modules，在文件的末尾添加：apm power_off=1</span></span><br><span class="line"><span class="comment">#vi  /boot/grub/grub.cfg</span></span><br><span class="line">找到下面内容：</span><br><span class="line"> </span><br><span class="line">inux --class gnu --class os &#123;</span><br><span class="line">     recordfail</span><br><span class="line">     gfxmode <span class="variable">$linux_gfx_mode</span></span><br><span class="line">     insmod gzio</span><br><span class="line">     insmod part_msdos</span><br><span class="line">     insmod ext2</span><br><span class="line">     <span class="built_in">set</span> root=<span class="string">'(hd0,msdos11)'</span></span><br><span class="line">     search --no-floppy --fs-uuid --set=root ed532c1f-b89a-470c-ad6f-539a3f04b993</span><br><span class="line">     linux   /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=ed532c1f-b89a-470c-ad6f-539a3f04b993 ro   quiet splash <span class="variable">$vt_handoff</span> acpi=force</span><br><span class="line">     initrd  /boot/initrd.img-3.2.0-24-generic-pae</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">操作就是加上acpi=force强制保证并退出。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="附加-虚拟机中安装ubuntu"><a href="#附加-虚拟机中安装ubuntu" class="headerlink" title="附加-虚拟机中安装ubuntu"></a>附加-虚拟机中安装ubuntu</h3><h5 id="所需软件和镜像"><a href="#所需软件和镜像" class="headerlink" title="所需软件和镜像"></a>所需软件和镜像</h5><ul>
+<li>虚拟机：VM12</li>
+<li>ubuntu15.04</li>
+</ul>
+<h5 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h5><p>相对于双系统，在虚拟机中安装会方便很多</p>
+<ul>
+<li><p>打开VM，选择新建虚拟机</p>
+<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu07.png" alt="ubuntu"></p>
+</li>
+<li><p>选择典型安装</p>
+<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu08.png" alt="ubuntu"></p>
+</li>
+<li><p>选择镜像ubuntu15.04</p>
+<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu09.png" alt="ubuntu"></p>
+</li>
+<li><p>输入信息</p>
+<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu10.png" alt="ubuntu"></p>
+</li>
+<li>接下来就是漫长的安装了，虚拟机的安装真是挺方便和实用的，当你安装好后需要安装VMtool，安装步骤我就不写了，因为网上已经有教程了，我这里链接一个就行了,切换语言也在这里<ul>
+<li><a href="http://jingyan.baidu.com/article/93f9803f0d9d9be0e46f55ce.html" target="_blank" rel="external">Ubuntu下 正确安装VMware Tools</a></li>
+<li><a href="http://jingyan.baidu.com/article/36d6ed1f2e95f61bce488353.html" target="_blank" rel="external">ubuntu切换中文语言</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="结语-1"><a href="#结语-1" class="headerlink" title="结语"></a>结语</h5><p>我用起来虚拟机非常流畅，也没有出现任何问题，重要的是便于安装和卸载，所以如果不是特别的需求，直接装进虚拟机吧</p>
 
       
     </div>
@@ -342,6 +390,16 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu安装/" rel="tag">#ubuntu安装</a>
+          
+            <a href="/tags/虚拟机/" rel="tag">#虚拟机</a>
+          
+            <a href="/tags/双系统/" rel="tag">#双系统</a>
+          
+        </div>
       
 
       
@@ -457,7 +515,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -466,7 +524,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -500,7 +558,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">下载Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用UltralSO制作u盘镜像"><span class="nav-number">2.</span> <span class="nav-text">使用UltralSO制作u盘镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配磁盘空间"><span class="nav-number">3.</span> <span class="nav-text">分配磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装镜像"><span class="nav-number">4.</span> <span class="nav-text">安装镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的一些问题"><span class="nav-number">6.</span> <span class="nav-text">遇到的一些问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">下载Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用UltralSO制作u盘镜像"><span class="nav-number">2.</span> <span class="nav-text">使用UltralSO制作u盘镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配磁盘空间"><span class="nav-number">3.</span> <span class="nav-text">分配磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装镜像"><span class="nav-number">4.</span> <span class="nav-text">安装镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的一些问题"><span class="nav-number">6.</span> <span class="nav-text">遇到的一些问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加-虚拟机中安装ubuntu"><span class="nav-number">7.</span> <span class="nav-text">附加-虚拟机中安装ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#所需软件和镜像"><span class="nav-number">7.0.1.</span> <span class="nav-text">所需软件和镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装步骤"><span class="nav-number">7.0.2.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结语-1"><span class="nav-number">7.0.3.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
