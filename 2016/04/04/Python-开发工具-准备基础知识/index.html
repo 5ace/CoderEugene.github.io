@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ubuntu安装,虚拟机,双系统," />
+  <meta name="keywords" content="Python3,字符编码," />
 
 
 
@@ -57,28 +57,19 @@
 
 
 
-<meta name="description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
+<meta name="description" content="虽然至今我最熟悉的语言还是 C++ ，但是 C++ 写一些算法还是挺麻烦的（特别是涉及到ADT，当然条件是不能用STL，哈哈），所以我决定花个几天时间来学习Python，这是一门非常优秀的高级语言，易学易用，非常适合写算法，因为它不会总让我的思绪停留在语言层面上，而是更注重算法本身。同时呢，对于网络数据的抓取以及小应用的开发也离不开它，由于我已经接触过类似C++，Java等语言，所以对于基本的知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu14.04+win10双系统安装步骤">
-<meta property="og:url" content="http://yoursite.com/2016/03/24/Ubuntu14.04+win10双系统安装步骤/index.html">
+<meta property="og:title" content="Python-开发工具+准备基础知识">
+<meta property="og:url" content="http://yoursite.com/2016/04/04/Python-开发工具-准备基础知识/index.html">
 <meta property="og:site_name" content="EUAdvancer">
-<meta property="og:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu01.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu02.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu03.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu04.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu05.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu06.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu07.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu08.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu09.png">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ubuntu10.png">
-<meta property="og:updated_time" content="2016-03-26T06:08:17.174Z">
+<meta property="og:description" content="虽然至今我最熟悉的语言还是 C++ ，但是 C++ 写一些算法还是挺麻烦的（特别是涉及到ADT，当然条件是不能用STL，哈哈），所以我决定花个几天时间来学习Python，这是一门非常优秀的高级语言，易学易用，非常适合写算法，因为它不会总让我的思绪停留在语言层面上，而是更注重算法本身。同时呢，对于网络数据的抓取以及小应用的开发也离不开它，由于我已经接触过类似C++，Java等语言，所以对于基本的知识">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/fifthpicture.jpg">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/Python01.png">
+<meta property="og:updated_time" content="2016-04-04T12:18:53.177Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu14.04+win10双系统安装步骤">
-<meta name="twitter:description" content="由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！">
-<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg">
+<meta name="twitter:title" content="Python-开发工具+准备基础知识">
+<meta name="twitter:description" content="虽然至今我最熟悉的语言还是 C++ ，但是 C++ 写一些算法还是挺麻烦的（特别是涉及到ADT，当然条件是不能用STL，哈哈），所以我决定花个几天时间来学习Python，这是一门非常优秀的高级语言，易学易用，非常适合写算法，因为它不会总让我的思绪停留在语言层面上，而是更注重算法本身。同时呢，对于网络数据的抓取以及小应用的开发也离不开它，由于我已经接触过类似C++，Java等语言，所以对于基本的知识">
+<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/fifthpicture.jpg">
 
 
 
@@ -96,7 +87,7 @@
   };
 </script>
 
-  <title> Ubuntu14.04+win10双系统安装步骤 | EUAdvancer </title>
+  <title> Python-开发工具+准备基础知识 | EUAdvancer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +237,7 @@
             
             
               
-                Ubuntu14.04+win10双系统安装步骤
+                Python-开发工具+准备基础知识
               
             
           </h1>
@@ -258,8 +249,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-24T21:39:50+08:00" content="2016-03-24">
-              2016-03-24
+            <time itemprop="dateCreated" datetime="2016-04-04T20:08:45+08:00" content="2016-04-04">
+              2016-04-04
             </time>
           </span>
 
@@ -272,8 +263,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -288,8 +279,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/24/Ubuntu14.04+win10双系统安装步骤/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/Ubuntu14.04+win10双系统安装步骤/" itemprop="commentsCount"></span>
+                <a href="/2016/04/04/Python-开发工具-准备基础知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/04/Python-开发工具-准备基础知识/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -311,74 +302,49 @@
       
 
       
-        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/thirdpicture.jpg" alt="bg"><br>由于最近在学习操作系统会用到linux并且我本身也感兴趣，所以就安装了ubuntu,在这里我也写下我的安装教程（包括了双系统和虚拟机），也算是个人总结，希望能有些帮助！<br><a id="more"></a></p>
-<h3 id="下载Ubuntu"><a href="#下载Ubuntu" class="headerlink" title="下载Ubuntu"></a>下载Ubuntu</h3><p>选择14的版本其实是为了稳定一些，不过在安装过程中还是出了许多问题。。</p>
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/fifthpicture.jpg" alt="bg"><br>虽然至今我最熟悉的语言还是 C++ ，但是 C++ 写一些算法还是挺麻烦的（特别是涉及到ADT，当然条件是不能用STL，哈哈），所以我决定花个几天时间来学习Python，这是一门非常优秀的高级语言，易学易用，非常适合写算法，因为它不会总让我的思绪停留在语言层面上，而是更注重算法本身。同时呢，对于网络数据的抓取以及小应用的开发也离不开它，由于我已经接触过类似C++，Java等语言，所以对于基本的知识我都会一笔带过，大部分精力集中在Python本身的新特性上，那么，接下来是我的Python第一课<br><a id="more"></a></p>
+<h3 id="选择Python工具"><a href="#选择Python工具" class="headerlink" title="选择Python工具"></a>选择Python工具</h3><p>其实最开始我写Python是用官方的<a href="(https://www.python.org/downloads/">python解释器</a>)的，这确实还不错，并且很适合初学者，使用非常简单和方便，但是，由于我用多了类似VS，Eclipse等IDE，对于没有智能补全等功能实在不能忍，所以现在使用的是Python的IDE中比较优秀的<a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="external">PyCharm</a>,用起来非常顺手，并且它还能写HTML，所以如果你也想要更高效的码字，我推荐PyCharm</p>
+<h3 id="选择Python版本"><a href="#选择Python版本" class="headerlink" title="选择Python版本"></a>选择Python版本</h3><p>如果你现在是刚开始学Python，也许你会发现Python是有2个版本的，也就是Python2.x和Python3.x，由于3.x版本相对2.x版本来说改动较大，所以很多支持2.x的模块或者代码都不适用于3.x，因此需要谨慎的选择版本，3.x虽然是最新版，但是由于网上很多模块或者解决问题都是针对2.x而不能同样适用在3.x中，所以你也许会在学习中花更多时间。不过，Python3.x是未来的趋势，如果你是刚开始学Python，我推荐你学习Python3.x，善于探索并解决问题本身也是程序猿最基本的素养，并且现在越来越多的模块支持Python3.x了</p>
+<h3 id="理解Python3字符编码"><a href="#理解Python3字符编码" class="headerlink" title="理解Python3字符编码"></a>理解Python3字符编码</h3><p>提及编码前，我们要先了解几个必须了解的知识</p>
+<pre><code>Unicode:编码符号集，它规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储
+
+UTF-8:一种Unicode的实现方式
+
+ASCII:使用指定的7位或8位二进制数组合来表示128或256种可能的字符
+
+1. 这三种字符编码都是将字符对应不同的二进制字节，其中ASCII编码是1个字节，Unicode编码通常是2个字节（可以看作中间连接层，它不能作为存储编码，需要类似UTF-8等实现编码来存储），而UTF-8编码常用的英文字母被编码成1个字节，汉字通常是3个字节
+2. 在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。也就是说，打开一个UTF-8编码的文件时，需要先转换成Unicode放在内存中，然后当要保存文件时，将Unicode转为UTF-8保存，ASCII是同样的道理
+
+明白了以上的理论后，理解Python3的编码就没问题了：
+Python3中字符串类型是str，默认就是unicode字符串，如果要在网络上传输，或者保存到磁盘上，就需要把str通过上述的字符编码变为以字节为单位的bytes，而具体实现方法会在字符串类型的介绍中讲述
+</code></pre><h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><ul>
+<li>输入<ul>
+<li>input([str])函数：括号内为可选字符串类型参数，用于提示输入内容<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = input(<span class="string">"请输入你的名字："</span>)</span><br><span class="line">请输入你的名字：</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
 <ul>
-<li><a href="http://www.ubuntu.com/download/desktop" target="_blank" rel="external">Ubuntu 14.04.4</a><br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu01.png" alt="ubuntu"></li>
-</ul>
-<h3 id="使用UltralSO制作u盘镜像"><a href="#使用UltralSO制作u盘镜像" class="headerlink" title="使用UltralSO制作u盘镜像"></a>使用UltralSO制作u盘镜像</h3><ul>
-<li>打开UltralSO （注意使用管理员模式打开）</li>
-<li>选择文件-》打开<br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu02.png" alt="ubuntu"></li>
-<li>选择你要安装的U盘-》选择启动-》写入硬盘<br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu03.png" alt="ubuntu"></li>
-<li>选择写入方式和便捷写入<br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu04.png" alt="ubuntu"></li>
-<li>点击写入即可</li>
-</ul>
-<h3 id="分配磁盘空间"><a href="#分配磁盘空间" class="headerlink" title="分配磁盘空间"></a>分配磁盘空间</h3><ul>
-<li>右键新加卷-》压缩卷-》填入分配的空间（我分配了30G左右）<br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu05.png" alt="ubuntu"></li>
-</ul>
-<h3 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h3><ul>
-<li>电脑插入刚才制作好的U盘，然后重新启动电脑，按F12进入Windows boot manager,选择USB启动</li>
-<li>选择中文简体语言，连接wifi，然后选择 ‘其他选项’(这里如果你不会磁盘分区，也可以直接选第一项，系统会自动分区)<br><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu06.png" alt="ubuntu"></li>
-<li>选择刚才分配出来的空闲空间，点击左下角的+号3次分区（每次都是空闲中分区）<ul>
-<li>第一次分区：点击+号，选择交换空间，大小我给了2048MB</li>
-<li>第二次分区：点击+号，选择/boot，大小我给了200MB</li>
-<li>第三次分区：点击+号，选择/，大小就将剩余空间都给了吧</li>
-</ul>
-</li>
-<li>对于下面的安装启动引导器，我是默认的，大概是ubuntu来引导window,如果是这样的话，在卸载ubuntu时需要清理引导才能格式化ubuntu，但是我后来卸载了也不知道有没有更改引导引导，但是我格式化了ubuntu还是没什么问题，然后用EasyBCD将启动时的ubuntu给删了就行了，但是大家最好还是多了解这方面（安装完后我是设置了将windows作为第一启动项）</li>
-<li>接下来也就是自己设置一些语言什么的了</li>
-</ul>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><ul>
-<li>到了这里，ubuntu也就安装完了，如果顺利的话，你应该能用ubuntu了，但是，由于各种原因，我还是卸载了ubuntu,后来安装在了虚拟机中。</li>
-</ul>
-<h3 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h3><p>没错，我就是遇到了这么多问题，所以最后卸载了它，并且装在了虚拟机当中，因为虽然解决了这些问题，但是我在运行时经常卡死。。。</p>
+<li><p>输出</p>
 <ul>
-<li>启动时卡死，出现Ubuntu is running in low-graphics mode<ul>
-<li>这应该是显卡驱动的原因，我的解决办法是多试几次进入图形界面后更新驱动</li>
-</ul>
-</li>
-<li>启动时黑屏<ul>
-<li>这大概是高版本内核问题，我的解决办法是在进入ubuntu时选择高级模式，选了一个较低版本就可以了</li>
-</ul>
-</li>
-<li>关机时卡死<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> 这是我网上找来的，并且解决了问题，以下：</span><br><span class="line"></span><br><span class="line">使用超级用户，或者在指令前加上sudo</span><br><span class="line"></span><br><span class="line"><span class="comment">#vi  /etc/modules，在文件的末尾添加：apm power_off=1</span></span><br><span class="line"><span class="comment">#vi  /boot/grub/grub.cfg</span></span><br><span class="line">找到下面内容：</span><br><span class="line"> </span><br><span class="line">inux --class gnu --class os &#123;</span><br><span class="line">     recordfail</span><br><span class="line">     gfxmode <span class="variable">$linux_gfx_mode</span></span><br><span class="line">     insmod gzio</span><br><span class="line">     insmod part_msdos</span><br><span class="line">     insmod ext2</span><br><span class="line">     <span class="built_in">set</span> root=<span class="string">'(hd0,msdos11)'</span></span><br><span class="line">     search --no-floppy --fs-uuid --set=root ed532c1f-b89a-470c-ad6f-539a3f04b993</span><br><span class="line">     linux   /boot/vmlinuz-3.2.0-24-generic-pae root=UUID=ed532c1f-b89a-470c-ad6f-539a3f04b993 ro   quiet splash <span class="variable">$vt_handoff</span> acpi=force</span><br><span class="line">     initrd  /boot/initrd.img-3.2.0-24-generic-pae</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">操作就是加上acpi=force强制保证并退出。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="附加-虚拟机中安装ubuntu"><a href="#附加-虚拟机中安装ubuntu" class="headerlink" title="附加-虚拟机中安装ubuntu"></a>附加-虚拟机中安装ubuntu</h3><h5 id="所需软件和镜像"><a href="#所需软件和镜像" class="headerlink" title="所需软件和镜像"></a>所需软件和镜像</h5><ul>
-<li>虚拟机：VM12</li>
-<li>ubuntu15.04</li>
-</ul>
-<h5 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h5><p>相对于双系统，在虚拟机中安装会方便很多</p>
+<li><p>print()函数，括号内可传入多个字符串，中间用逗号隔开，并且1个逗号输出一个空格</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(<span class="string">"zxc"</span>,<span class="string">"123"</span>,123)</span><br><span class="line">zxc 123 123</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>打开VM，选择新建虚拟机</p>
-<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu07.png" alt="ubuntu"></p>
+<li><p>由于在print()函数默认在输出后换行，所以如果你希望输入后不换行，可以在参数中添加end=””，end=”” 表示打印对象以什么结尾</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连续2次print</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"123"</span>,<span class="string">"dsf"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"we"</span>)</span><br><span class="line">输出结果：</span><br><span class="line">123 dsf</span><br><span class="line">we</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连续2次print</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"123"</span>,<span class="string">"dsf"</span>,end=<span class="string">""</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"we"</span>)</span><br><span class="line">输出结果：</span><br><span class="line">123 dsfwe</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连续2次print</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"123"</span>,<span class="string">"dsf"</span>,end=<span class="string">"**"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"we"</span>)</span><br><span class="line">输出结果：</span><br><span class="line">123 dsf**we</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>选择典型安装</p>
-<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu08.png" alt="ubuntu"></p>
+<li><p>在print()函数中添加一对三引号： <code>&quot;&quot;&quot;</code> 或 <code>&#39;&#39;&#39;</code>可以按照内容的格式输出</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(<span class="string">""</span><span class="string">"</span><br><span class="line">This is the first line</span><br><span class="line">OK,the next line</span><br><span class="line">do what you want to do</span><br><span class="line">"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">This is the first line</span><br><span class="line">OK,the next line</span><br><span class="line"><span class="keyword">do</span> what you want to <span class="keyword">do</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>选择镜像ubuntu15.04</p>
-<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu09.png" alt="ubuntu"></p>
+</ul>
 </li>
-<li><p>输入信息</p>
-<p><img src="http://7xryau.com1.z0.glb.clouddn.com/ubuntu10.png" alt="ubuntu"></p>
-</li>
-<li>接下来就是漫长的安装了，虚拟机的安装真是挺方便和实用的，当你安装好后需要安装VMtool，安装步骤我就不写了，因为网上已经有教程了，我这里链接一个就行了,切换语言也在这里<ul>
-<li><a href="http://jingyan.baidu.com/article/93f9803f0d9d9be0e46f55ce.html" target="_blank" rel="external">Ubuntu下 正确安装VMware Tools</a></li>
-<li><a href="http://jingyan.baidu.com/article/36d6ed1f2e95f61bce488353.html" target="_blank" rel="external">ubuntu切换中文语言</a></li>
 </ul>
 </li>
 </ul>
-<h5 id="结语-1"><a href="#结语-1" class="headerlink" title="结语"></a>结语</h5><p>我用起来虚拟机非常流畅，也没有出现任何问题，重要的是便于安装和卸载，所以如果不是特别的需求，直接装进虚拟机吧</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>在Python这个万物皆对象的语言中，变量的赋值和 C++ 是有很大区别的。首先，变量是没有类型的，有类型的是对象，所以，我们可以把变量理解成C++的一个引用，看接下来这个例子也许你就能明白其中奥秘了<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="string">"zxc"</span>  <span class="comment"># 一个指向 zxc 字符串数据类型的n（n没有类型）</span></span><br><span class="line">n = “asd”  <span class="comment"># 这时候，由于字符串是不可改变的对象，因此变成了一个指向 asd 字符串数据类型的n（n没有类型），而原来的zxc被抛弃了</span></span><br><span class="line"></span><br><span class="line">实例：</span><br><span class="line">n = <span class="string">"zxc"</span>  <span class="comment"># 一个指向 zxc 字符串数据类型的n（n没有类型）</span></span><br><span class="line">m = n  <span class="comment"># m同样指向 zxc 字符串数据类型</span></span><br><span class="line">n = <span class="string">"asd"</span>  <span class="comment"># n指向了 asd 字符串，但是zxc并没有被抛弃，因为m仍然指向它</span></span><br><span class="line"><span class="built_in">print</span>(m)  <span class="comment"># 输出zxc</span></span><br></pre></td></tr></table></figure></p>
+<p>图解：</p>
+<p><img src="http://7xryau.com1.z0.glb.clouddn.com/Python01.png" alt="Python"></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>看到这里，我们对于学习Python的基本准备要求都已经具备了，那么，下一次的更新，应该会对Python的数据类型进行一次整理，干巴爹~！</p>
 
       
     </div>
@@ -393,11 +359,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ubuntu安装/" rel="tag">#ubuntu安装</a>
+            <a href="/tags/Python3/" rel="tag">#Python3</a>
           
-            <a href="/tags/虚拟机/" rel="tag">#虚拟机</a>
-          
-            <a href="/tags/双系统/" rel="tag">#双系统</a>
+            <a href="/tags/字符编码/" rel="tag">#字符编码</a>
           
         </div>
       
@@ -406,17 +370,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/19/QQ旋风模拟登陆分析/" rel="next" title="QQ旋风模拟登陆分析">
-                <i class="fa fa-chevron-left"></i> QQ旋风模拟登陆分析
+              <a href="/2016/04/01/Linux基础-基本操作指令/" rel="next" title="Linux基础-基本操作指令">
+                <i class="fa fa-chevron-left"></i> Linux基础-基本操作指令
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/01/Linux基础-基本操作指令/" rel="prev" title="Linux基础-基本操作指令">
-                Linux基础-基本操作指令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,8 +425,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/Ubuntu14.04+win10双系统安装步骤/"
-           data-title="Ubuntu14.04+win10双系统安装步骤" data-url="http://yoursite.com/2016/03/24/Ubuntu14.04+win10双系统安装步骤/">
+      <div class="ds-thread" data-thread-key="2016/04/04/Python-开发工具-准备基础知识/"
+           data-title="Python-开发工具+准备基础知识" data-url="http://yoursite.com/2016/04/04/Python-开发工具-准备基础知识/">
       </div>
     
   </div>
@@ -562,7 +522,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">下载Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用UltralSO制作u盘镜像"><span class="nav-number">2.</span> <span class="nav-text">使用UltralSO制作u盘镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配磁盘空间"><span class="nav-number">3.</span> <span class="nav-text">分配磁盘空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装镜像"><span class="nav-number">4.</span> <span class="nav-text">安装镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的一些问题"><span class="nav-number">6.</span> <span class="nav-text">遇到的一些问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加-虚拟机中安装ubuntu"><span class="nav-number">7.</span> <span class="nav-text">附加-虚拟机中安装ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#所需软件和镜像"><span class="nav-number">7.0.1.</span> <span class="nav-text">所需软件和镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装步骤"><span class="nav-number">7.0.2.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结语-1"><span class="nav-number">7.0.3.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择Python工具"><span class="nav-number">1.</span> <span class="nav-text">选择Python工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择Python版本"><span class="nav-number">2.</span> <span class="nav-text">选择Python版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解Python3字符编码"><span class="nav-number">3.</span> <span class="nav-text">理解Python3字符编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入和输出"><span class="nav-number">4.</span> <span class="nav-text">输入和输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">5.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
