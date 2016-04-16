@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python3,爬虫利器,lxml,BeautifulSoup4,requests," />
+  <meta name="keywords" content="爬虫利器,Python3,lxml,BeautifulSoup4,requests," />
 
 
 
@@ -68,7 +68,7 @@
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%972.png">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%973.png">
 <meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E7%88%AC%E8%99%AB%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png">
-<meta property="og:updated_time" content="2016-04-15T13:50:53.928Z">
+<meta property="og:updated_time" content="2016-04-16T13:00:50.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python-模块介绍+58同城二手市场实战爬虫">
 <meta name="twitter:description" content="其实最初想学Python就是为了爬虫而来的，不知怎么写着写着就写到算法上去了，为了致敬我最初的想法我就简单实现了58同城的爬虫作为练习">
@@ -372,7 +372,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date = soup.get_text()   [返回类型为Unicode]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>得到tag的属性值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date = soup.get.get(<span class="string">'src'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date = soup.get(<span class="string">'src'</span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 58同城二手市场爬虫，参数u是要爬取的url</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get58City</span><span class="params">(u)</span>:</span></span><br><span class="line">    url = u</span><br><span class="line">    data = requests.get(url)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 由于data.text自动通过编码ISO-8859-1返回unicode字符导致中文乱码，所以先修改编码，再得到text</span></span><br><span class="line">    data.encoding = <span class="string">"utf-8"</span>  <span class="comment"># 将编码ISO-8859-1修改为编码为utf-8</span></span><br><span class="line">    soup = BeautifulSoup(data.text, <span class="string">'lxml'</span>)   <span class="comment"># 更简单的方法是使用data.content,它返回的是字节，而Beautiful会将其转码成unicode</span></span><br><span class="line">    <span class="comment"># print(soup)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 搜索title，img，content</span></span><br><span class="line">    title = soup.find_all(<span class="string">'a'</span>, class_=<span class="string">'t'</span>)</span><br><span class="line">    <span class="comment"># #infolist &gt; table &gt; tbody &gt; tr:nth-child(2) &gt; td.img &gt; a &gt; img</span></span><br><span class="line">    <span class="comment"># img = soup.find_all(src=re.compile('jpg'))  # 正则搜索图片</span></span><br><span class="line">    img = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.img &gt; a &gt; img'</span>)  <span class="comment"># css选择器搜索图片，不知道为什么它不支持tbody,所以删去就可以了</span></span><br><span class="line">    content = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.t &gt; p.sub'</span>)  <span class="comment"># 上同</span></span><br><span class="line">    address = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.t &gt; p.abt &gt; a'</span>)</span><br><span class="line">    price = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.pd01 &gt; b'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将收集到的数据插入列表</span></span><br><span class="line">    <span class="keyword">for</span> everyImg, everyTitle, everyContent, everyAddress, everyPrice <span class="keyword">in</span> zip(img, title, content, address, price):</span><br><span class="line">        zipData = &#123;</span><br><span class="line">            <span class="string">"title"</span>: everyTitle.get_text().strip(),  <span class="comment"># 删除同时去掉左右两边的空格（包括'\n', '\r', '\t', ' ')</span></span><br><span class="line">            <span class="string">"img"</span>: everyImg.get(<span class="string">"src"</span>),  <span class="comment"># 得到src属性值</span></span><br><span class="line">            <span class="string">"content"</span>: everyContent.get_text(),</span><br><span class="line">            <span class="string">"address"</span>: everyAddress.get_text(),</span><br><span class="line">            <span class="string">"price"</span>: everyPrice.get_text().strip()</span><br><span class="line">        &#125;</span><br><span class="line">        print(zipData)</span><br><span class="line">        information.append(zipData)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 爬取58同城50页数据</span></span><br><span class="line">information = []</span><br><span class="line"><span class="keyword">for</span> number <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    <span class="comment"># 为了防止封IP，每次爬取间隔2秒</span></span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> number == <span class="number">1</span>:</span><br><span class="line">        get58City(<span class="string">'http://bj.58.com/sale/'</span>)</span><br><span class="line">    <span class="keyword">elif</span> number &lt; <span class="number">10</span>:</span><br><span class="line">        url = <span class="string">'http://bj.58.com/sale/pn'</span>+str(number)</span><br><span class="line">        get58City(url)</span><br></pre></td></tr></table></figure>
@@ -392,9 +392,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python3/" rel="tag">#Python3</a>
-          
             <a href="/tags/爬虫利器/" rel="tag">#爬虫利器</a>
+          
+            <a href="/tags/Python3/" rel="tag">#Python3</a>
           
             <a href="/tags/lxml/" rel="tag">#lxml</a>
           
@@ -416,6 +416,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/16/Python-MySQL-Connector模块介绍及应用/" rel="prev" title="Python-MySQL Connector模块介绍及应用">
+                Python-MySQL Connector模块介绍及应用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -510,7 +514,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -527,7 +531,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

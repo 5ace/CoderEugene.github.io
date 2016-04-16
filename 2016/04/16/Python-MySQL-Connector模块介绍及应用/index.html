@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="爬虫利器,MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="爬虫爬取的数据往哪放呢，当然是插入数据库喽，这时候就需要用Python连接数据库，我这里介绍的模块是MySQL Connector">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-MySQL Connector模块介绍及应用">
+<meta property="og:url" content="http://yoursite.com/2016/04/16/Python-MySQL-Connector模块介绍及应用/index.html">
+<meta property="og:site_name" content="EUAdvancer">
+<meta property="og:description" content="爬虫爬取的数据往哪放呢，当然是插入数据库喽，这时候就需要用Python连接数据库，我这里介绍的模块是MySQL Connector">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/ninthpicture.jpg">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C2.png">
+<meta property="og:updated_time" content="2016-04-16T13:01:52.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python-MySQL Connector模块介绍及应用">
+<meta name="twitter:description" content="爬虫爬取的数据往哪放呢，当然是插入数据库喽，这时候就需要用Python连接数据库，我这里介绍的模块是MySQL Connector">
+<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/ninthpicture.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Python-MySQL Connector模块介绍及应用 | EUAdvancer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?27412ed04aae550d2faf683f58d6b554";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EUAdvancer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">程序猿，码农，在读</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python-MySQL Connector模块介绍及应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-16T20:49:52+08:00" content="2016-04-16">
+              2016-04-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/16/Python-MySQL-Connector模块介绍及应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/16/Python-MySQL-Connector模块介绍及应用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/ninthpicture.jpg" alt="bg"><br>爬虫爬取的数据往哪放呢，当然是插入数据库喽，这时候就需要用Python连接数据库，我这里介绍的模块是MySQL Connector<br><a id="more"></a></p>
+<h3 id="MySQL-Connector模块介绍"><a href="#MySQL-Connector模块介绍" class="headerlink" title="MySQL Connector模块介绍"></a>MySQL Connector模块介绍</h3><blockquote>
+<p><a href="http://dev.mysql.com/doc/connector-python/en/preface.html" target="_blank" rel="external">官方介绍</a><br>MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API Specification v2.0 (PEP 249). It is written in pure Python and does not have any dependencies except for the Python Standard Library.<br>这是MySQL官方的纯Python驱动，而且API使用的是非常方便的哦！所有使用方法在<a href="http://dev.mysql.com/doc/connector-python/en/preface.html" target="_blank" rel="external">官方文档</a>  都有介绍，如果你对英语不是很熟悉，对于简单基本的使用也可以看我这里的！</p>
+</blockquote>
+<h3 id="MySQL-Connector模块安装"><a href="#MySQL-Connector模块安装" class="headerlink" title="MySQL Connector模块安装"></a>MySQL Connector模块安装</h3><ol>
+<li>下载<a href="http://dev.mysql.com/downloads/connector/python/" target="_blank" rel="external">msi文件(.msi files)</a>,选择相应版本下载</li>
+<li>双击安装msi文件或者在cmd中输入以下内容,VER和PYVER分别为Connector/Python和Python的版本号（也就是你下载的msi文件名）<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msiexec /i mysql-connector-python-VER-pyPYVER.msi</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="使用MySQL-Connector连接数据库"><a href="#使用MySQL-Connector连接数据库" class="headerlink" title="使用MySQL Connector连接数据库"></a>使用MySQL Connector连接数据库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">from</span> mysql.connector <span class="keyword">import</span> errorcode</span><br><span class="line"></span><br><span class="line"><span class="comment"># user为mysql账号，password为mysql密码，host为主机地址（如果是本地mysql就是127.0.0.1），database为数据库名称</span></span><br><span class="line">config = &#123;</span><br><span class="line">  <span class="string">'user'</span>: <span class="string">'scott'</span>,</span><br><span class="line">  <span class="string">'password'</span>: <span class="string">'tiger'</span>,</span><br><span class="line">  <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="string">'database'</span>: <span class="string">'employees'</span>,</span><br><span class="line">  <span class="string">'raise_on_warnings'</span>: <span class="keyword">True</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cnx = mysql.connector.connect(**config)  <span class="comment"># 连接数据库</span></span><br><span class="line"><span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:  <span class="comment"># 如果没有连接成功输出相应错误原因</span></span><br><span class="line">    <span class="keyword">if</span> err.errno == errorcode.ER_ACCESS_DENIED_ERROR:</span><br><span class="line">        print(<span class="string">"Something is wrong with your user name or password"</span>)</span><br><span class="line">    <span class="keyword">elif</span> err.errno == errorcode.ER_BAD_DB_ERROR:</span><br><span class="line">        print(<span class="string">"Database does not exist"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(err)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    cnx.close()</span><br></pre></td></tr></table></figure>
+<h3 id="使用MySQL-Connector创建数据库"><a href="#使用MySQL-Connector创建数据库" class="headerlink" title="使用MySQL Connector创建数据库"></a>使用MySQL Connector创建数据库</h3><blockquote>
+<p>cnx.database：This property sets the current (default) database by executing a USE statement. The property can also be used to retrieve the current database name.<br>可以设置默认使用的数据库（如果这个数据库不存在则会抛出异常），同时也可以获取当前的database,返回string类型（Unicode）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">from</span> mysql.connector <span class="keyword">import</span> errorcode</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果在连接数据库时没有设置database，则必须先创建数据库以便于后续的创建表和插入数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_database</span><span class="params">(cursor)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cursor.execute(</span><br><span class="line">            <span class="string">"CREATE DATABASE &#123;&#125; DEFAULT CHARACTER SET 'utf8'"</span>.format(DB_NAME))</span><br><span class="line">    <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">        print(<span class="string">"Failed creating database: &#123;&#125;"</span>.format(err))</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># config中不需要写database</span></span><br><span class="line">config = &#123;</span><br><span class="line">  <span class="string">'user'</span>: <span class="string">'scott'</span>,</span><br><span class="line">  <span class="string">'password'</span>: <span class="string">'tiger'</span>,</span><br><span class="line">  <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="string">'raise_on_warnings'</span>: <span class="keyword">True</span>,</span><br><span class="line">&#125;</span><br><span class="line">DB_NAME = <span class="string">'employees'</span>  <span class="comment"># 即将创建的数据库名</span></span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cnx.database = DB_NAME    <span class="comment"># 判断是否存在这个数据库，如果存在则不会抛出异常，反之抛出异常</span></span><br><span class="line"><span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">    <span class="keyword">if</span> err.errno == errorcode.ER_BAD_DB_ERROR:  <span class="comment"># 如果抛出的异常是没有这个数据库则创建数据库</span></span><br><span class="line">        create_database(cursor)  <span class="comment"># 创建数据库</span></span><br><span class="line">        cnx.database = DB_NAME  <span class="comment"># 再次判断是否存在该数据库（可以不写）</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(err)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="使用MySQL-Connector创建表"><a href="#使用MySQL-Connector创建表" class="headerlink" title="使用MySQL Connector创建表"></a>使用MySQL Connector创建表</h3><blockquote>
+<p>MySQLCursor.execute() Method<br>Syntax:<br>cursor.execute(operation, params=None, multi=False)<br>iterator = cursor.execute(operation, params=None, multi=True)<br>This method executes the given database operation (query or command). The parameters found in the tuple or dictionary params are bound to the variables in the operation. Specify variables using %s or %(name)s parameter style (that is, using format or pyformat style). execute() returns an iterator if multi is True.<br>这个方法执行给定的数据库操作，参数可以使元组或者字典，当multi为true时会返回一个迭代器</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">from</span> mysql.connector <span class="keyword">import</span> errorcode</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">  <span class="string">'user'</span>: <span class="string">'scott'</span>,</span><br><span class="line">  <span class="string">'password'</span>: <span class="string">'tiger'</span>,</span><br><span class="line">  <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="string">'database'</span>: <span class="string">'employees'</span>,</span><br><span class="line">  <span class="string">'raise_on_warnings'</span>: <span class="keyword">True</span>,</span><br><span class="line">&#125;</span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line">TABLES = &#123;&#125;</span><br><span class="line">TABLES[<span class="string">'employees'</span>] = (</span><br><span class="line">    <span class="string">"CREATE TABLE `employees` ("</span></span><br><span class="line">    <span class="string">"  `emp_no` int(11) NOT NULL AUTO_INCREMENT,"</span></span><br><span class="line">    <span class="string">"  `birth_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `first_name` varchar(14) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `last_name` varchar(16) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `gender` enum('M','F') NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `hire_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`emp_no`)"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line">TABLES[<span class="string">'departments'</span>] = (</span><br><span class="line">    <span class="string">"CREATE TABLE `departments` ("</span></span><br><span class="line">    <span class="string">"  `dept_no` char(4) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `dept_name` varchar(40) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`dept_no`), UNIQUE KEY `dept_name` (`dept_name`)"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line">TABLES[<span class="string">'salaries'</span>] = (</span><br><span class="line">    <span class="string">"CREATE TABLE `salaries` ("</span></span><br><span class="line">    <span class="string">"  `emp_no` int(11) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `salary` int(11) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `from_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `to_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`emp_no`,`from_date`), KEY `emp_no` (`emp_no`),"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `salaries_ibfk_1` FOREIGN KEY (`emp_no`) "</span></span><br><span class="line">    <span class="string">"     REFERENCES `employees` (`emp_no`) ON DELETE CASCADE"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line">TABLES[<span class="string">'dept_emp'</span>] = (</span><br><span class="line">    <span class="string">"CREATE TABLE `dept_emp` ("</span></span><br><span class="line">    <span class="string">"  `emp_no` int(11) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `dept_no` char(4) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `from_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `to_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`emp_no`,`dept_no`), KEY `emp_no` (`emp_no`),"</span></span><br><span class="line">    <span class="string">"  KEY `dept_no` (`dept_no`),"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `dept_emp_ibfk_1` FOREIGN KEY (`emp_no`) "</span></span><br><span class="line">    <span class="string">"     REFERENCES `employees` (`emp_no`) ON DELETE CASCADE,"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `dept_emp_ibfk_2` FOREIGN KEY (`dept_no`) "</span></span><br><span class="line">    <span class="string">"     REFERENCES `departments` (`dept_no`) ON DELETE CASCADE"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line">TABLES[<span class="string">'dept_manager'</span>] = (</span><br><span class="line">    <span class="string">"  CREATE TABLE `dept_manager` ("</span></span><br><span class="line">    <span class="string">"  `dept_no` char(4) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `emp_no` int(11) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `from_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `to_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`emp_no`,`dept_no`),"</span></span><br><span class="line">    <span class="string">"  KEY `emp_no` (`emp_no`),"</span></span><br><span class="line">    <span class="string">"  KEY `dept_no` (`dept_no`),"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `dept_manager_ibfk_1` FOREIGN KEY (`emp_no`) "</span></span><br><span class="line">    <span class="string">"     REFERENCES `employees` (`emp_no`) ON DELETE CASCADE,"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `dept_manager_ibfk_2` FOREIGN KEY (`dept_no`) "</span></span><br><span class="line">    <span class="string">"     REFERENCES `departments` (`dept_no`) ON DELETE CASCADE"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line">TABLES[<span class="string">'titles'</span>] = (</span><br><span class="line">    <span class="string">"CREATE TABLE `titles` ("</span></span><br><span class="line">    <span class="string">"  `emp_no` int(11) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `title` varchar(50) NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `from_date` date NOT NULL,"</span></span><br><span class="line">    <span class="string">"  `to_date` date DEFAULT NULL,"</span></span><br><span class="line">    <span class="string">"  PRIMARY KEY (`emp_no`,`title`,`from_date`), KEY `emp_no` (`emp_no`),"</span></span><br><span class="line">    <span class="string">"  CONSTRAINT `titles_ibfk_1` FOREIGN KEY (`emp_no`)"</span></span><br><span class="line">    <span class="string">"     REFERENCES `employees` (`emp_no`) ON DELETE CASCADE"</span></span><br><span class="line">    <span class="string">") ENGINE=InnoDB"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name, ddl <span class="keyword">in</span> TABLES.items():  <span class="comment"># Python3的字典不支持iteritems</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        print(<span class="string">"Creating table &#123;&#125;: "</span>.format(name), end=<span class="string">''</span>)</span><br><span class="line">        cursor.execute(ddl)</span><br><span class="line">    <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">        <span class="keyword">if</span> err.errno == errorcode.ER_TABLE_EXISTS_ERROR:</span><br><span class="line">            print(<span class="string">"already exists."</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(err.msg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"OK"</span>)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br></pre></td></tr></table></figure>
+<h3 id="使用MySQL-Connector插入数据"><a href="#使用MySQL-Connector插入数据" class="headerlink" title="使用MySQL Connector插入数据"></a>使用MySQL Connector插入数据</h3><blockquote>
+<p>MySQLCursor.lastrowid Property<br>This read-only property returns the value generated for an AUTO_INCREMENT column by the previous INSERT or UPDATE statement or None when there is no such value available.<br>这个属性是只读的（不允许修改），它会返回先前插入或更新的AUTO_INCREMENT值（如果没有值则返回none，AUTO_INCREMENT是对主键 id 自动增加编号，则创建表时可以设置）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> date, datetime, timedelta</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">  <span class="string">'user'</span>: <span class="string">'scott'</span>,</span><br><span class="line">  <span class="string">'password'</span>: <span class="string">'tiger'</span>,</span><br><span class="line">  <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="string">'database'</span>: <span class="string">'employees'</span>,</span><br><span class="line">  <span class="string">'raise_on_warnings'</span>: <span class="keyword">True</span>,</span><br><span class="line">&#125;</span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line">tomorrow = datetime.now().date() + timedelta(days=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">add_employee = (<span class="string">"INSERT INTO employees "</span></span><br><span class="line">               <span class="string">"(first_name, last_name, hire_date, gender, birth_date) "</span></span><br><span class="line">               <span class="string">"VALUES (%s, %s, %s, %s, %s)"</span>)</span><br><span class="line">add_salary = (<span class="string">"INSERT INTO salaries "</span></span><br><span class="line">              <span class="string">"(emp_no, salary, from_date, to_date) "</span></span><br><span class="line">              <span class="string">"VALUES (%(emp_no)s, %(salary)s, %(from_date)s, %(to_date)s)"</span>)  <span class="comment"># 如果是字典应该是这样的格式，不然会报错</span></span><br><span class="line"></span><br><span class="line">data_employee = (<span class="string">'Geert'</span>, <span class="string">'Vanderkelen'</span>, tomorrow, <span class="string">'M'</span>, date(<span class="number">1977</span>, <span class="number">6</span>, <span class="number">14</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert new employee</span></span><br><span class="line">cursor.execute(add_employee, data_employee)</span><br><span class="line">emp_no = cursor.lastrowid  <span class="comment"># emp_no = 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert salary information</span></span><br><span class="line">data_salary = &#123;</span><br><span class="line">  <span class="string">'emp_no'</span>: emp_no,</span><br><span class="line">  <span class="string">'salary'</span>: <span class="number">50000</span>,</span><br><span class="line">  <span class="string">'from_date'</span>: tomorrow,</span><br><span class="line">  <span class="string">'to_date'</span>: date(<span class="number">9999</span>, <span class="number">1</span>, <span class="number">1</span>),</span><br><span class="line">&#125;</span><br><span class="line">cursor.execute(add_salary, data_salary)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make sure data is committed to the database(如果数据库引擎为Innodb，执行完成后需执行cnn.commit()进行事务提交)</span></span><br><span class="line">cnx.commit()</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br></pre></td></tr></table></figure>
+<h3 id="使用MySQL-Connector查询数据"><a href="#使用MySQL-Connector查询数据" class="headerlink" title="使用MySQL Connector查询数据"></a>使用MySQL Connector查询数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">  <span class="string">'user'</span>: <span class="string">'scott'</span>,</span><br><span class="line">  <span class="string">'password'</span>: <span class="string">'tiger'</span>,</span><br><span class="line">  <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="string">'database'</span>: <span class="string">'employees'</span>,</span><br><span class="line">  <span class="string">'raise_on_warnings'</span>: <span class="keyword">True</span>,</span><br><span class="line">&#125;</span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line"></span><br><span class="line">query = (<span class="string">"SELECT first_name, last_name, hire_date FROM employees "</span></span><br><span class="line">         <span class="string">"WHERE hire_date BETWEEN %s AND %s"</span>)</span><br><span class="line"></span><br><span class="line">hire_start = datetime.date(<span class="number">2016</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">hire_end = datetime.date(<span class="number">2016</span>, <span class="number">12</span>, <span class="number">31</span>)</span><br><span class="line"></span><br><span class="line">cursor.execute(query, (hire_start, hire_end))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (first_name, last_name, hire_date) <span class="keyword">in</span> cursor:</span><br><span class="line">    print(<span class="string">"&#123;&#125;, &#123;&#125; was hired on &#123;:%d %b %Y&#125;"</span>.format(last_name, first_name, hire_date))</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br></pre></td></tr></table></figure>
+<h3 id="爬虫数据写进数据库实战代码"><a href="#爬虫数据写进数据库实战代码" class="headerlink" title="爬虫数据写进数据库实战代码"></a>爬虫数据写进数据库实战代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">from</span>  mysql.connector <span class="keyword">import</span> errorcode</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#  数据库信息</span></span><br><span class="line">config = &#123;</span><br><span class="line">    <span class="string">'user'</span>: <span class="string">'xxx'</span>,</span><br><span class="line">    <span class="string">'password'</span>: <span class="string">'xxx'</span>,</span><br><span class="line">    <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否创建数据库</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isCreate_database</span><span class="params">(cnx, cursor)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cnx.database = DB_NAME    <span class="comment"># 判断是否存在这个数据库，如果存在则不会抛出异常，反之抛出异常</span></span><br><span class="line">    <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">        <span class="keyword">if</span> err.errno == errorcode.ER_BAD_DB_ERROR:  <span class="comment"># 如果抛出的异常是没有这个数据库则创建数据库</span></span><br><span class="line">            create_database(cursor)  <span class="comment"># 创建数据库</span></span><br><span class="line">            cnx.database = DB_NAME  <span class="comment"># 再次判断是否存在该数据库（可以不写）</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(err)</span><br><span class="line">            exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_database</span><span class="params">(cursor)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cursor.execute(</span><br><span class="line">            <span class="string">"CREATE DATABASE &#123;&#125; DEFAULT CHARACTER SET 'utf8'"</span>.format(DB_NAME))</span><br><span class="line">    <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">        print(<span class="string">"Failed creating database: &#123;&#125;"</span>.format(err))</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_table</span><span class="params">(cursor)</span>:</span></span><br><span class="line">    TABLES = &#123;&#125;</span><br><span class="line">    <span class="comment"># AUTO_INCREMENT对主键 id 自动增加编号,所以设置了 auto_increment 属性后，必须设置为主键 PRIMARY KEY</span></span><br><span class="line">    TABLES[<span class="string">"secondhand"</span>] = (<span class="string">"CREATE TABLE `secondhand` ( \</span><br><span class="line">        `title` varchar(100) NOT NULL,\</span><br><span class="line">        `address` varchar(20),\</span><br><span class="line">        `content` varchar(100),\</span><br><span class="line">        `price` float(4),\</span><br><span class="line">        `img` varchar(100)\</span><br><span class="line">        )ENGINE=InnoDB"</span>)</span><br><span class="line">    <span class="keyword">for</span> name, ddl <span class="keyword">in</span> TABLES.items():  <span class="comment"># Python3的字典不支持iteritems</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            print(<span class="string">"Creating table &#123;&#125;: "</span>.format(name), end=<span class="string">''</span>)</span><br><span class="line">            cursor.execute(ddl)</span><br><span class="line">        <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">            <span class="keyword">if</span> err.errno == errorcode.ER_TABLE_EXISTS_ERROR:</span><br><span class="line">                print(<span class="string">"already exists."</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(err.msg)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"OK"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入字典数据到数据库</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_table</span><span class="params">(cursor)</span>:</span></span><br><span class="line">    add_secondhand = (<span class="string">"INSERT INTO secondhand "</span></span><br><span class="line">               <span class="string">"(title, address, content, price, img) "</span></span><br><span class="line">               <span class="string">"VALUES (%(title)s, %(address)s, %(content)s, %(price)s, %(img)s)"</span>)</span><br><span class="line">    date_secondhand = information</span><br><span class="line">    cursor.executemany(add_secondhand, date_secondhand)  <span class="comment"># executemany用于插入字典</span></span><br><span class="line">    <span class="comment"># Make sure data is committed to the database(如果数据库引擎为Innodb，执行完成后需执行cnn.commit()进行事务提交)</span></span><br><span class="line">    cnx.commit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 58同城二手市场爬虫，参数u是要爬取的url</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get58City</span><span class="params">(u)</span>:</span></span><br><span class="line">    url = u</span><br><span class="line">    data = requests.get(url)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 由于data.text自动通过编码ISO-8859-1返回unicode字符导致中文乱码，所以先修改编码，再得到text</span></span><br><span class="line">    data.encoding = <span class="string">"utf-8"</span>  <span class="comment"># 将编码ISO-8859-1修改为编码为utf-8</span></span><br><span class="line">    soup = BeautifulSoup(data.text, <span class="string">'lxml'</span>)   <span class="comment"># 更简单的方法是使用data.content,它返回的是字节，而Beautiful会将其转码成unicode</span></span><br><span class="line">    <span class="comment"># print(soup)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 搜索title，img，content</span></span><br><span class="line">    title = soup.find_all(<span class="string">'a'</span>, class_=<span class="string">'t'</span>)</span><br><span class="line">    <span class="comment"># #infolist &gt; table &gt; tbody &gt; tr:nth-child(2) &gt; td.img &gt; a &gt; img</span></span><br><span class="line">    <span class="comment"># img = soup.find_all(src=re.compile('jpg'))  # 正则搜索图片</span></span><br><span class="line">    img = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.img &gt; a &gt; img'</span>)  <span class="comment"># css选择器搜索图片，不知道为什么它不支持tbody,所以删去就可以了</span></span><br><span class="line">    content = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.t &gt; p.sub'</span>)  <span class="comment"># 上同</span></span><br><span class="line">    address = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.t &gt; p.abt &gt; a'</span>)</span><br><span class="line">    price = soup.select(<span class="string">'#infolist &gt; table &gt; tr &gt; td.pd01 &gt; b'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将收集到的数据插入列表</span></span><br><span class="line">    <span class="keyword">for</span> everyImg, everyTitle, everyContent, everyAddress, everyPrice <span class="keyword">in</span> zip(img, title, content, address, price):</span><br><span class="line">        zipData = &#123;</span><br><span class="line">            <span class="string">"title"</span>: everyTitle.get_text().strip(),  <span class="comment"># 删除同时去掉左右两边的空格（包括'\n', '\r', '\t', ' ')</span></span><br><span class="line">            <span class="string">"img"</span>: everyImg.get(<span class="string">"src"</span>),  <span class="comment"># 得到src属性值</span></span><br><span class="line">            <span class="string">"content"</span>: everyContent.get_text(),</span><br><span class="line">            <span class="string">"address"</span>: everyAddress.get_text(),</span><br><span class="line">            <span class="string">"price"</span>: everyPrice.get_text().strip()</span><br><span class="line">        &#125;</span><br><span class="line">        print(zipData)</span><br><span class="line">        information.append(zipData)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 爬取58同城50页数据</span></span><br><span class="line">DB_NAME = <span class="string">"city"</span>  <span class="comment"># 数据库名</span></span><br><span class="line">information = []  <span class="comment"># 所有爬到的信息</span></span><br><span class="line"><span class="keyword">for</span> number <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    <span class="comment"># 为了防止封IP，每次爬取间隔2秒</span></span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> number == <span class="number">1</span>:</span><br><span class="line">        get58City(<span class="string">'http://bj.58.com/sale/'</span>)</span><br><span class="line">    <span class="keyword">elif</span> number &lt; <span class="number">10</span>:</span><br><span class="line">        url = <span class="string">'http://bj.58.com/sale/pn'</span>+str(number)</span><br><span class="line">        get58City(url)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 连接mysql并插入数据，如果没有连接成功则输出相应内容</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cnx = mysql.connector.connect(**config)</span><br><span class="line">            cursor = cnx.cursor()</span><br><span class="line">            isCreate_database(cnx, cursor)  <span class="comment"># 如果没有该数据库则创建，否则不创建</span></span><br><span class="line">            create_table(cursor)  <span class="comment"># 创建表</span></span><br><span class="line">            insert_table(cursor)  <span class="comment"># 插入数据</span></span><br><span class="line">        <span class="keyword">except</span> mysql.connector.Error <span class="keyword">as</span> err:</span><br><span class="line">            <span class="keyword">if</span> err.errno == errorcode.ER_ACCESS_DENIED_ERROR:</span><br><span class="line">                print(<span class="string">"Something is wrong with your user name or password"</span>)</span><br><span class="line">            <span class="keyword">elif</span> err.errno == errorcode.ER_BAD_DB_ERROR:</span><br><span class="line">                print(<span class="string">"Database does not exist"</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(err)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cursor.close()</span><br><span class="line">            cnx.close()</span><br><span class="line">print(<span class="string">"爬取个数"</span>, len(information))</span><br></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="http://7xryau.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png" alt="mysql"><br><img src="http://7xryau.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C2.png" alt="mysql"></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>这里只是列举了最基本常用的操作，更多的API需要你自己去看官方文档</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫利器/" rel="tag">#爬虫利器</a>
+          
+            <a href="/tags/MySQL/" rel="tag">#MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/15/Python-模块介绍-58同城二手市场实战爬虫/" rel="next" title="Python-模块介绍+58同城二手市场实战爬虫">
+                <i class="fa fa-chevron-left"></i> Python-模块介绍+58同城二手市场实战爬虫
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/16/Python-MySQL-Connector模块介绍及应用/"
+           data-title="Python-MySQL Connector模块介绍及应用" data-url="http://yoursite.com/2016/04/16/Python-MySQL-Connector模块介绍及应用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ZhangZheng" />
+          <p class="site-author-name" itemprop="name">ZhangZheng</p>
+          <p class="site-description motion-element" itemprop="description">Personal blog, software developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-Connector模块介绍"><span class="nav-number">1.</span> <span class="nav-text">MySQL Connector模块介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-Connector模块安装"><span class="nav-number">2.</span> <span class="nav-text">MySQL Connector模块安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL-Connector连接数据库"><span class="nav-number">3.</span> <span class="nav-text">使用MySQL Connector连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL-Connector创建数据库"><span class="nav-number">4.</span> <span class="nav-text">使用MySQL Connector创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL-Connector创建表"><span class="nav-number">5.</span> <span class="nav-text">使用MySQL Connector创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL-Connector插入数据"><span class="nav-number">6.</span> <span class="nav-text">使用MySQL Connector插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySQL-Connector查询数据"><span class="nav-number">7.</span> <span class="nav-text">使用MySQL Connector查询数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫数据写进数据库实战代码"><span class="nav-number">8.</span> <span class="nav-text">爬虫数据写进数据库实战代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试结果"><span class="nav-number">9.</span> <span class="nav-text">测试结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">10.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangZheng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzcoder"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
