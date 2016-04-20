@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="抓包,fiddler,网络爬虫,模拟登陆," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="在上次的分析中，我已经分析到了QQ旋风登陆,并且也简单的分析了g_tk，skey等的获取，那么这次我就讲讲它们到底有什么用，使用的抓包工具仍然是fiddler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QQ旋风模拟登陆分析(下)">
+<meta property="og:url" content="http://yoursite.com/2016/04/20/QQ旋风模拟登陆分析-下/index.html">
+<meta property="og:site_name" content="EUAdvancer">
+<meta property="og:description" content="在上次的分析中，我已经分析到了QQ旋风登陆,并且也简单的分析了g_tk，skey等的获取，那么这次我就讲讲它们到底有什么用，使用的抓包工具仍然是fiddler">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/picture10.jpg">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/github%E6%88%AA%E5%9B%BE%E4%B8%8A.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/github%E6%88%AA%E5%9B%BE%E4%B8%8B.png">
+<meta property="og:updated_time" content="2016-04-20T15:34:02.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QQ旋风模拟登陆分析(下)">
+<meta name="twitter:description" content="在上次的分析中，我已经分析到了QQ旋风登陆,并且也简单的分析了g_tk，skey等的获取，那么这次我就讲讲它们到底有什么用，使用的抓包工具仍然是fiddler">
+<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/picture10.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> QQ旋风模拟登陆分析(下) | EUAdvancer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?27412ed04aae550d2faf683f58d6b554";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EUAdvancer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">程序猿，码农，在读</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                QQ旋风模拟登陆分析(下)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-20T23:28:39+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/杂文/" itemprop="url" rel="index">
+                    <span itemprop="name">杂文</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/20/QQ旋风模拟登陆分析-下/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/QQ旋风模拟登陆分析-下/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/picture10.jpg" alt="bg"><br>在上次的分析中，我已经分析到了QQ旋风登陆,并且也简单的分析了g_tk，skey等的获取，那么这次我就讲讲它们到底有什么用，使用的抓包工具仍然是fiddler<br><a id="more"></a></p>
+<h3 id="模拟登陆QQ旋风的目的"><a href="#模拟登陆QQ旋风的目的" class="headerlink" title="模拟登陆QQ旋风的目的"></a>模拟登陆QQ旋风的目的</h3><p>你登陆QQ旋风是为了什么？如果你登入过QQ旋风离线网页，你可以看到它允许你提交种子并解析种子使你能够下载种子，问题出在有很多种子是无法解析的，并且下载速度很感人，所以我们的目的很明确：拿到种子的真实下载地址，然后通过IDM等下载工具或者通过播放器播放</p>
+<h3 id="g-tk等参数的作用"><a href="#g-tk等参数的作用" class="headerlink" title="g_tk等参数的作用"></a>g_tk等参数的作用</h3><p>因为我们的目的就是解析种子就是为了解析种子，所以我们需要对相关数据进行抓包，在抓包分析中你发现你需要这些这些通过get,post等方法提交才能得到希望得到的内容，这会在接下来的分析中提到</p>
+<h3 id="分析得到种子真实地址的提交"><a href="#分析得到种子真实地址的提交" class="headerlink" title="分析得到种子真实地址的提交"></a>分析得到种子真实地址的提交</h3><p>分析数据的顺序就是从你需要得到的数据往回推，然后用代码实现，所以我们现在也按这个顺序分析<br>在经过简单的分析，你能够很轻易的发现获取真实地址的提交url就是下面这个url<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://lixian.qq.com/handler/lixian/get_http_url.php</span><br></pre></td></tr></table></figure></p>
+<p>在它返回的正文中会出现这样的数据，其中的com_url就是我们需要的真实地址<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"ret"</span>:0,<span class="string">"msg"</span>:<span class="string">"ok"</span>,<span class="string">"data"</span>:&#123;<span class="string">"type"</span>:<span class="string">"FTN"</span>,<span class="string">"com_url"</span>:<span class="string">"http://xflx.store.sh.qq.com:443/ftn_handler/3829985e8e8281e3b45dfa78f06597564fdee704bc989bd4d13e53844565af397b4ad4704ab56ba8dfd772d52be7a71834218a7b2f217cd6c172fe98994d46d9/%E8%A5%BF%E6%B8%B8%E8%AE%B0%E4%B9%8B%E5%AD%99%E6%82%9F%E7%A9%BA%E4%B8%89%E6%89%93%E7%99%BD%E9%AA%A8%E7%B2%BE.The.Monkey.King.2.2016.HD720P.X264.AAC.Mandarin.CHS-ENG.Mp4Ba.mp4"</span>,<span class="string">"com_cookie"</span>:<span class="string">"0b00642e"</span>,<span class="string">"xf_url"</span>:<span class="string">"qqdl://aHR0cDovLzE5Mi4xNjguMS4yMzMvZnRuX2hhbmRsZXIvJUU4JUE1JUJGJUU2JUI4JUI4JUU4JUFFJUIwJUU0JUI5JThCJUU1JUFEJTk5JUU2JTgyJTlGJUU3JUE5JUJBJUU0JUI4JTg5JUU2JTg5JTkzJUU3JTk5JUJEJUU5JUFBJUE4JUU3JUIyJUJFLlRoZS5Nb25rZXkuS2luZy4yLjIwMTYuSEQ3MjBQLlgyNjQuQUFDLk1hbmRhcmluLkNIUy1FTkcuTXA0QmEubXA0PyYmdHhmX2ZpZD01OTU5NjNkOGU1ZDk4NjRkMDVlNmY1MTY2NDg5MGUzYzBiMDA2NDJl"</span>&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后我们观察提交这个url需要的参数,我们大概需要提交一个hash（在一开始我也认为是magnet的hash，不过在分析后我发现它其实是file_hash），还有电影名和g_tk，所以你明白为啥要获取g_tk了吧<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hash</span>=595963D8E5D9864D05E6F51664890E3C0B00642E&amp;filename=%E8%A5%BF%E6%B8%B8%E8%AE%B0%E4%B9%8B%E5%AD%99%E6%82%9F%E7%A9%BA%E4%B8%89%E6%89%93%E7%99%BD%E9%AA%A8%E7%B2%BE.The.Monkey.King.2.2016.HD720P.X264.AAC.Mandarin.CHS-ENG.Mp4Ba.mp4&amp;browser=ie&amp;g_tk=643586917</span><br></pre></td></tr></table></figure></p>
+<p>我们接下去分析header，我们大概可以获取到的信息是提交方式为post，Referer的值以及一些cookie（虽然这里有很多cookie，但是不要惊慌，这些cookie其实都是登陆之后产生的，所以你可以在登陆阶段的所以cookie保存下来在这里一并提交就可以）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /handler/lixian/get_http_url.php HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Referer: http://lixian.qq.com/main.html<span class="comment">###</span></span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)</span><br><span class="line">Host: lixian.qq.com</span><br><span class="line">Content-Length: 255</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cookie: ts_last=lixian.qq.com/main.html; ts_uid=6723597330; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login%3Fuin%3D%26appid%3D567008010%26f_url%3Dloginerroralert%26hide_title_bar%3D1%26style%3D1%26s_url%3Dhttp%253A//lixian.qq.co; PHPSESSID=2daf4e61bc812fcd26e73fbab63e0767; pgv_pvid=9154761540; ptui_loginuin=354929502; pt2gguin=o0354929502; RK=fWtvAiTDV+; ptcz=03a563dece55d0546b9adc66c17abdf3760bdfb5d6c94b501bc3244511da6ede; ptisp=ctc; uin=o0354929502; skey=@nqRctewSi; pgv_info=ssid=s4803832475; FTN5K=0b00642e</span><br></pre></td></tr></table></figure></p>
+<p>分析到这里，我们大概知道我们需要的是hash和电影名，所以我们需要继续寻找能找到hash的地方</p>
+<h3 id="得到hash（file-hash）和电影名"><a href="#得到hash（file-hash）和电影名" class="headerlink" title="得到hash（file_hash）和电影名"></a>得到hash（file_hash）和电影名</h3><p>经过短暂的删选后，我们又得到了一个url<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://lixian.qq.com/handler/lixian/get_lixian_status.php</span><br></pre></td></tr></table></figure></p>
+<p>来看看返回的正文，其中有一段”hash”:”595963D8E5D9864D05E6F51664890E3C0B00642E”，而这里同时也有电影名<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"data"</span>:[&#123;<span class="string">"addtime"</span>:1460190627,<span class="string">"com_cookie"</span>:<span class="string">""</span>,<span class="string">"com_url"</span>:<span class="string">""</span>,<span class="string">"comp_size"</span>:2301131603,<span class="string">"dl_status"</span>:12,<span class="string">"file_name"</span>:<span class="string">"\u897f\u6e38\u8bb0\u4e4b\u5b59\u609f\u7a7a\u4e09\u6253\u767d\u9aa8\u7cbe.The.Monkey.King.2.2016.HD720P.X264.AAC.Mandarin.CHS-ENG.Mp4Ba.mp4"</span>,<span class="string">"file_size"</span>:2301131603,<span class="string">"file_url"</span>:<span class="string">"E9370C31074CA481643C352D85C3D7926903F551_6"</span>,<span class="string">"hash"</span>:<span class="string">"595963D8E5D9864D05E6F51664890E3C0B00642E"</span>,<span class="string">"left_time"</span>:195613,<span class="string">"mid"</span>:<span class="string">"1524410605044917213"</span>,<span class="string">"task_type"</span>:<span class="string">"bt"</span>,<span class="string">"code"</span>:<span class="string">"139bea3ae95f72b9b60360a658c4a5fee449bc6938637d60706f6ec59fdfe484245ec3b2e2acfc2e"</span>&#125;,&#123;<span class="string">"addtime"</span>:1460706259,<span class="string">"com_cookie"</span>:<span class="string">""</span>,<span class="string">"com_url"</span>:<span class="string">""</span>,<span class="string">"comp_size"</span>:2301131603,<span class="string">"dl_status"</span>:12,<span class="string">"file_name"</span>:<span class="string">"\u897f\u6e38\u8bb0\u4e4b\u5b59\u609f\u7a7a\u4e09\u6253\u767d\u9aa8\u7cbe.The.Monkey.King.2.2016.HD720P.X264.AAC.Mandarin.CHS-ENG.Mp4Ba.mp4"</span>,<span class="string">"file_size"</span>:2301131603,<span class="string">"file_url"</span>:<span class="string">"E9370C31074CA481643C352D85C3D7926903F551_6"</span>,<span class="string">"hash"</span>:<span class="string">"595963D8E5D9864D05E6F51664890E3C0B00642E"</span>,<span class="string">"left_time"</span>:711251,<span class="string">"mid"</span>:<span class="string">"1524410605107212851"</span>,<span class="string">"task_type"</span>:<span class="string">"bt"</span>,<span class="string">"code"</span>:<span class="string">"139bea3ae95f72b9b60360a658c4a5fee449bc6938637d60706f6ec59fdfe484245ec3b2e2acfc2e"</span>&#125;,&#123;<span class="string">"addtime"</span>:1460862606,<span class="string">"com_cookie"</span>:<span class="string">""</span>,<span class="string">"com_url"</span>:<span class="string">""</span>,<span class="string">"comp_size"</span>:3516820634,<span class="string">"dl_status"</span>:12,<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.mkv"</span>,<span class="string">"file_size"</span>:3516820634,<span class="string">"file_url"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_1"</span>,<span class="string">"hash"</span>:<span class="string">"95E44A3136B3A7EFEB8E82EEAEC3C1E2763CFF31"</span>,<span class="string">"left_time"</span>:867598,<span class="string">"mid"</span>:<span class="string">"1524410605124561198"</span>,<span class="string">"task_type"</span>:<span class="string">"bt"</span>,<span class="string">"code"</span>:<span class="string">"1f979a37eb2d05b0c00066ac21c5d4fc913ec11a46640913071e15cfecab92f5232ac0c192defd5a"</span>&#125;,&#123;<span class="string">"addtime"</span>:1460862606,<span class="string">"com_cookie"</span>:<span class="string">""</span>,<span class="string">"com_url"</span>:<span class="string">""</span>,<span class="string">"comp_size"</span>:0,<span class="string">"dl_status"</span>:5,<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.nfo"</span>,<span class="string">"file_size"</span>:4848,<span class="string">"file_url"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_2"</span>,<span class="string">"hash"</span>:<span class="string">"0000000000000000000000000000000000000000"</span>,<span class="string">"left_time"</span>:867600,<span class="string">"mid"</span>:<span class="string">"1524410605064213198"</span>,<span class="string">"task_type"</span>:<span class="string">"bt"</span>,<span class="string">"code"</span>:<span class="string">"1692ef33ef5c06b1c30614af50c2a18ae44cc96f4e667c66766b66cc9faae7f7242cc3b2e4a8fe5b"</span>&#125;,&#123;<span class="string">"addtime"</span>:1460862606,<span class="string">"com_cookie"</span>:<span class="string">""</span>,<span class="string">"com_url"</span>:<span class="string">""</span>,<span class="string">"comp_size"</span>:108533,<span class="string">"dl_status"</span>:12,<span class="string">"file_name"</span>:<span class="string">"English.srt"</span>,<span class="string">"file_size"</span>:108533,<span class="string">"file_url"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_0"</span>,<span class="string">"hash"</span>:<span class="string">"B35A3B0BE9710E84C7F67D145E215E26BF93D457"</span>,<span class="string">"left_time"</span>:867598,<span class="string">"mid"</span>:<span class="string">"1524410605074559198"</span>,<span class="string">"task_type"</span>:<span class="string">"bt"</span>,<span class="string">"code"</span>:<span class="string">"6491ea42ec2e06c3b60f13ae50b7a98e974bbf6949127d62731e64cd9adfe5f1565acab190acfb5c"</span>&#125;],<span class="string">"msg"</span>:<span class="string">""</span>,<span class="string">"ret"</span>:0&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到这里仿佛胜利就在眼前了，所以我们看看它的提交的参数，看来我们还需要mid这个值<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mids=1524410605074559198%2C1524410605124561198%2C1524410605064213198</span><br></pre></td></tr></table></figure></p>
+<p>再看看header，好像并没有什么出奇的地方<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /handler/lixian/get_lixian_status.php HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Referer: http://lixian.qq.com/main.html<span class="comment">###</span></span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)</span><br><span class="line">Host: lixian.qq.com</span><br><span class="line">Content-Length: 68</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cookie: ts_last=lixian.qq.com/main.html; ts_uid=6723597330; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login%3Fuin%3D%26appid%3D567008010%26f_url%3Dloginerroralert%26hide_title_bar%3D1%26style%3D1%26s_url%3Dhttp%253A//lixian.qq.co; PHPSESSID=2daf4e61bc812fcd26e73fbab63e0767; pgv_pvid=9154761540; ptui_loginuin=354929502; pt2gguin=o0354929502; RK=fWtvAiTDV+; ptcz=03a563dece55d0546b9adc66c17abdf3760bdfb5d6c94b501bc3244511da6ede; ptisp=ctc; uin=o0354929502; skey=@nqRctewSi; pgv_info=ssid=s4803832475; FTN5K=0b00642e</span><br></pre></td></tr></table></figure></p>
+<h3 id="得到mid"><a href="#得到mid" class="headerlink" title="得到mid"></a>得到mid</h3><p>这次得到的url是<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://lixian.qq.com/handler/xfjson2012.php</span><br></pre></td></tr></table></figure></p>
+<p>返回的正文为，在这里mid的所有值都在这里了<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">try&#123;callback(&#123;<span class="string">"ret"</span>:0,<span class="string">"data"</span>:[&#123;<span class="string">"mid"</span>:<span class="string">"1524410605074559198"</span>,<span class="string">"file_name"</span>:<span class="string">"English.srt"</span>,<span class="string">"file_size"</span>:<span class="string">"108533"</span>,<span class="string">"bt_id"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_0"</span>&#125;,&#123;<span class="string">"mid"</span>:<span class="string">"1524410605124561198"</span>,<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.mkv"</span>,<span class="string">"file_size"</span>:<span class="string">"3516820634"</span>,<span class="string">"bt_id"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_1"</span>&#125;,&#123;<span class="string">"mid"</span>:<span class="string">"1524410605064213198"</span>,<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.nfo"</span>,<span class="string">"file_size"</span>:<span class="string">"4848"</span>,<span class="string">"bt_id"</span>:<span class="string">"C614AAAACE8CE1CA85736148C6C3E855C729F028_2"</span>&#125;]&#125;);&#125;catch(e)&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再来看看提交的参数，我们需要提交hash（这个才是真正的magnet的hash），文件名，文件大小，taskname，这次的参数有点多，而且不能从上述的url中得到（观察获取的顺序），所以还得寻找url<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=add_bt_task&amp;r=0.9633212021536193&amp;<span class="built_in">hash</span>=C614AAAACE8CE1CA85736148C6C3E855C729F028&amp;taskname=Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT&amp;index=0%231%232&amp;filesize=108533%233516820634%234848&amp;filename=English.srt%23Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.mkv%23Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.nfo</span><br></pre></td></tr></table></figure></p>
+<p>再来看看header，虽然好像仍然没有什么特别的地方<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /handler/xfjson2012.php HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Accept: */*</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Referer: http://lixian.qq.com/main.html<span class="comment">###</span></span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)</span><br><span class="line">Host: lixian.qq.com</span><br><span class="line">Content-Length: 302</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cookie: ts_last=lixian.qq.com/main.html; ts_uid=6723597330; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login%3Fuin%3D%26appid%3D567008010%26f_url%3Dloginerroralert%26hide_title_bar%3D1%26style%3D1%26s_url%3Dhttp%253A//lixian.qq.co; PHPSESSID=2daf4e61bc812fcd26e73fbab63e0767; pgv_pvid=9154761540; ptui_loginuin=354929502; pt2gguin=o0354929502; RK=fWtvAiTDV+; ptcz=03a563dece55d0546b9adc66c17abdf3760bdfb5d6c94b501bc3244511da6ede; ptisp=ctc; uin=o0354929502; skey=@nqRctewSi; pgv_info=ssid=s4803832475; FTN5K=0b00642e</span><br></pre></td></tr></table></figure></p>
+<h3 id="得到hash（magnet），文件名，文件大小，taskname"><a href="#得到hash（magnet），文件名，文件大小，taskname" class="headerlink" title="得到hash（magnet），文件名，文件大小，taskname"></a>得到hash（magnet），文件名，文件大小，taskname</h3><p>很快我们又得到了url<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://lixian.qq.com/handler/bt_handler.php?cmd=readinfo</span><br></pre></td></tr></table></figure></p>
+<p>返回的正文，在这里所有的参数都有了<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"ret"</span>:0,<span class="string">"hash"</span>:<span class="string">"c614aaaace8ce1ca85736148c6c3e855c729f028"</span>,<span class="string">"name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT"</span>,<span class="string">"files"</span>:[&#123;<span class="string">"file_name"</span>:<span class="string">"English.srt"</span>,<span class="string">"file_size"</span>:<span class="string">"105.99KB"</span>,<span class="string">"file_size_ori"</span>:108533,<span class="string">"file_index"</span>:0&#125;,&#123;<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.mkv"</span>,<span class="string">"file_size"</span>:<span class="string">"3.3G"</span>,<span class="string">"file_size_ori"</span>:3516820634,<span class="string">"file_index"</span>:1&#125;,&#123;<span class="string">"file_name"</span>:<span class="string">"Mr.Right.2015.1080p.WEB-DL.DD5.1.H264-FGT.nfo"</span>,<span class="string">"file_size"</span>:<span class="string">"4.73KB"</span>,<span class="string">"file_size_ori"</span>:4848,<span class="string">"file_index"</span>:2&#125;,&#123;<span class="string">"file_name"</span>:<span class="string">"RARBG.com.txt"</span>,<span class="string">"file_size"</span>:<span class="string">"0.03KB"</span>,<span class="string">"file_size_ori"</span>:34,<span class="string">"file_index"</span>:3&#125;]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继续观察提交的参数，可能你没接触过这样的参数，不要着急，我们看看header<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------7e0e2910d74</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">"myfile"</span>; filename=<span class="string">"【BT天堂】【BTtiantang.com】[1080p]真命天子.3.28GB.torrent"</span></span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line">...............................(接下来是一大串的乱码)</span><br></pre></td></tr></table></figure></p>
+<p>header的内容，注意到了嘛，Content-Type: multipart/form-data; boundary=—————————7e0e2910d74，这是和前面的header不一样的地方，这代表提交的是文件，这时候你应该联想到了这大概是我们提交的种子的时候提交的url了（看来总算要结束了）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">POST /handler/bt_handler.php?cmd=readinfo HTTP/1.1</span><br><span class="line">Accept: text/html, application/xhtml+xml, image/jxr, */*</span><br><span class="line">Referer: http://lixian.qq.com/main.html</span><br><span class="line">Accept-Language: zh-CN</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)</span><br><span class="line">Content-Type: multipart/form-data; boundary=---------------------------7e0e2910d74</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Length: 67990</span><br><span class="line">Host: lixian.qq.com</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cookie: ts_last=lixian.qq.com/main.html; ts_uid=6723597330; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login%3Fuin%3D%26appid%3D567008010%26f_url%3Dloginerroralert%26hide_title_bar%3D1%26style%3D1%26s_url%3Dhttp%253A//lixian.qq.co; PHPSESSID=2daf4e61bc812fcd26e73fbab63e0767; pgv_pvid=9154761540; ptui_loginuin=354929502; pt2gguin=o0354929502; RK=fWtvAiTDV+; ptcz=03a563dece55d0546b9adc66c17abdf3760bdfb5d6c94b501bc3244511da6ede; ptisp=ctc; uin=o0354929502; skey=@nqRctewSi; pgv_info=ssid=s4803832475; FTN5K=0b00642e</span><br></pre></td></tr></table></figure></p>
+<p>所以在你提交文件后就可以获取这些内容了，大功告成~！</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>在写代码的时候需要将上述的顺序反过来，然后一步步的得到需要的参数，然后我们就完成了种子的解析。当然由于腾讯对于服务器的返回接口地址做的不是很好，所以我们还需要自己再重新判断网址头的可用性，同时在提交过程中我们最好还要删除一些不必要的txt或者jpg等文件，对于这些细节我这里不涉及了，具体问题需要你自己去慢慢解决了。最后我上两张根据上述思路写成的代码截图（Python实现）<br><img src="http://7xryau.com1.z0.glb.clouddn.com/github%E6%88%AA%E5%9B%BE%E4%B8%8A.png" alt="QQ旋风"><br><img src="http://7xryau.com1.z0.glb.clouddn.com/github%E6%88%AA%E5%9B%BE%E4%B8%8B.png" alt="QQ旋风"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/抓包/" rel="tag">#抓包</a>
+          
+            <a href="/tags/fiddler/" rel="tag">#fiddler</a>
+          
+            <a href="/tags/网络爬虫/" rel="tag">#网络爬虫</a>
+          
+            <a href="/tags/模拟登陆/" rel="tag">#模拟登陆</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/16/Python-MySQL-Connector模块介绍及应用/" rel="next" title="Python-MySQL Connector模块介绍及应用">
+                <i class="fa fa-chevron-left"></i> Python-MySQL Connector模块介绍及应用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/20/QQ旋风模拟登陆分析-下/"
+           data-title="QQ旋风模拟登陆分析(下)" data-url="http://yoursite.com/2016/04/20/QQ旋风模拟登陆分析-下/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ZhangZheng" />
+          <p class="site-author-name" itemprop="name">ZhangZheng</p>
+          <p class="site-description motion-element" itemprop="description">Personal blog, software developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟登陆QQ旋风的目的"><span class="nav-number">1.</span> <span class="nav-text">模拟登陆QQ旋风的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g-tk等参数的作用"><span class="nav-number">2.</span> <span class="nav-text">g_tk等参数的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析得到种子真实地址的提交"><span class="nav-number">3.</span> <span class="nav-text">分析得到种子真实地址的提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#得到hash（file-hash）和电影名"><span class="nav-number">4.</span> <span class="nav-text">得到hash（file_hash）和电影名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#得到mid"><span class="nav-number">5.</span> <span class="nav-text">得到mid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#得到hash（magnet），文件名，文件大小，taskname"><span class="nav-number">6.</span> <span class="nav-text">得到hash（magnet），文件名，文件大小，taskname</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangZheng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzcoder"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
