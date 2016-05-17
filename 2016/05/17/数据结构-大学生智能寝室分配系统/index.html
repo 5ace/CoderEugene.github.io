@@ -1,0 +1,817 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="既然是智能寝室分配系统，那就不是简单的增删改查的系统了，它的主要功能是根据学生的属性和爱好分配为一个寝室，所以这里面会涉及到大量的数据结构。这是我的数据结构的课程设计，思考了很久，所以在这里详细的介绍一番">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-大学生智能寝室分配系统">
+<meta property="og:url" content="http://yoursite.com/2016/05/17/数据结构-大学生智能寝室分配系统/index.html">
+<meta property="og:site_name" content="EUAdvancer">
+<meta property="og:description" content="既然是智能寝室分配系统，那就不是简单的增删改查的系统了，它的主要功能是根据学生的属性和爱好分配为一个寝室，所以这里面会涉及到大量的数据结构。这是我的数据结构的课程设计，思考了很久，所以在这里详细的介绍一番">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/bg13.jpg">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E5%AF%9D%E5%AE%A4.png">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/%E5%AF%9D%E5%AE%A4%E6%B5%81%E7%A8%8B.png">
+<meta property="og:updated_time" content="2016-05-17T14:46:54.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构-大学生智能寝室分配系统">
+<meta name="twitter:description" content="既然是智能寝室分配系统，那就不是简单的增删改查的系统了，它的主要功能是根据学生的属性和爱好分配为一个寝室，所以这里面会涉及到大量的数据结构。这是我的数据结构的课程设计，思考了很久，所以在这里详细的介绍一番">
+<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/bg13.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 数据结构-大学生智能寝室分配系统 | EUAdvancer </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?27412ed04aae550d2faf683f58d6b554";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EUAdvancer</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">程序猿，码农，在读</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构-大学生智能寝室分配系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T22:41:13+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/数据结构-大学生智能寝室分配系统/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/数据结构-大学生智能寝室分配系统/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/bg13.jpg" alt="bg"><br>既然是智能寝室分配系统，那就不是简单的增删改查的系统了，它的主要功能是根据学生的属性和爱好分配为一个寝室，所以这里面会涉及到大量的数据结构。这是我的数据结构的课程设计，思考了很久，所以在这里详细的介绍一番<br><a id="more"></a></p>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><p>其实根据爱好分配寝室看上去是十分简单的需求，但是仔细思考会发现我们需要解决很多问题</p>
+<ol>
+<li>由于每个学生的爱好和本身属性不一致，所以在分配时不能简单的将爱好相同的人组成一个寝室</li>
+<li>由于学生的爱好不一定会匹配到学生，所以我们需要通过加权的方式进行筛选</li>
+</ol>
+<p>基于以上的思考，我初步理清了自己的思路，选择贪心算法+全排列的方式实现<br><img src="http://7xryau.com1.z0.glb.clouddn.com/%E5%AF%9D%E5%AE%A4.png" alt="qinshi"><br>选择决策树毫无疑问，选择map的原因在于当学生匹配不到学生时，我需要通过降权的方式来搜索其他学生，但是这里非常难写，无论是树的遍历还是栈来实现都会出现一些问题，所以我只能选择全排列的方式来实现，说实话这确实是这个系统最耗时间的地方（其实经过和室友的分析，我发现其实这里可以不写，因为降权的方式还可以通过定义喜欢度阈值来实现，而喜欢度阈值已经在我的代码中了，所以我这里很有可能多此一举了），但是我也只能做到这里了。</p>
+<h3 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h3><p><img src="http://7xryau.com1.z0.glb.clouddn.com/%E5%AF%9D%E5%AE%A4%E6%B5%81%E7%A8%8B.png" alt="qinshi"><br>这是代码的大概的流程，当然在细节上还是有些差距的，不过基本流程就是以上</p>
+<ul>
+<li>在插入学生阶段，建立决策树时我会生成相应的唯一值，而生成的方式很简单，就是类似哈夫曼编码，生成该值后，map的key是具有相关性的，所以我只需要进行二进制数的全排列就可以按权遍历所有链表</li>
+<li>在分配寝室阶段，基本思路就是对每个学生寻找室友，直到找全所有室友才进行下一轮寻找，在这其中涉及到比较重要的一环就是喜欢度阈值，这是可变的阈值，用来判断该学生是否有机会加入寝室，所以新加入的学生需要对原有的寝室人员分别进行一次喜欢度判断，如果一直无法找到，则降低阈值来实现降权（其实这也是实现权的一种，所以现在的情况是我用了2种方式降权，总觉得这很蠢，不过当时真没想到，所以程序设计的略复杂）</li>
+</ul>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><p>头文件：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> DORMITORYALLOCATE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DORMOTPRYALLOCATE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line">使用说明：</span><br><span class="line"></span><br><span class="line">1. 构造对象</span><br><span class="line">DormitoryAllocate(string *hobbies = nullptr, int numberOfHobbies = 0, int *rooms = nullptr, int numberOfRooms = 0)</span><br><span class="line">hobbies：传入用于比较的标准爱好（不是学生的爱好）</span><br><span class="line">numberOfHobbies: 传入爱好的个数</span><br><span class="line">rooms：用于分配的寝室号</span><br><span class="line">numberOfRooms：寝室号个数</span><br><span class="line"></span><br><span class="line">2. 插入学生信息</span><br><span class="line">insertStudent(long studentId, string studentName, string *properties, string *hobbies, int *standPlace)</span><br><span class="line">studentId：学生学号</span><br><span class="line">studentName：学生姓名</span><br><span class="line">properties：学生属性，属性的顺序应和标准爱好顺序相同</span><br><span class="line">hobbies：学生爱好，优先级从小到大（权重从左到右递增）</span><br><span class="line">standPlace：学生爱好相对于标准爱好的下标索引</span><br><span class="line"></span><br><span class="line">3. 分配寝室</span><br><span class="line">void allocateRooms()</span><br><span class="line"></span><br><span class="line">4. 输出未分配寝室学生</span><br><span class="line">void printAllStudents()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">另附--注意事项：</span><br><span class="line">	1. 爱好及属性个数不多于7个</span><br><span class="line">	2. 判断爱好是否符合逻辑上只能有2种情况</span><br><span class="line">	3. 学生学号不要太长，类型为long</span><br><span class="line">	4. 总人数不是4的倍数时，这些人会默认分配为一个寝室</span><br><span class="line">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> DormitoryAllocate</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">// 学生信息类</span></span><br><span class="line">	<span class="keyword">class</span> Student</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Student(<span class="keyword">long</span> id = <span class="number">0</span>, <span class="built_in">string</span> n = <span class="string">""</span>, <span class="built_in">string</span> *p = <span class="literal">nullptr</span>, <span class="built_in">string</span> *h = <span class="literal">nullptr</span>, <span class="keyword">int</span> s = <span class="number">0</span>, <span class="keyword">int</span> dn = <span class="number">0</span>, <span class="keyword">int</span> *sp = <span class="literal">nullptr</span>)</span><br><span class="line">			:studentId(id), name(n), properties(p), hobbies(h), dormitoryNumber(dn), size(s), standPlace(sp) &#123;&#125;</span><br><span class="line">		Student(<span class="keyword">const</span> Student &amp;s); <span class="comment">// 深复制</span></span><br><span class="line">		<span class="keyword">void</span> <span class="keyword">operator</span>=(<span class="keyword">const</span> Student &amp;s); <span class="comment">// 重载=运算符进行深复制</span></span><br><span class="line">		<span class="keyword">long</span> studentId; <span class="comment">// 学生学号</span></span><br><span class="line">		<span class="built_in">string</span> name; <span class="comment">// 学生姓名</span></span><br><span class="line">		<span class="built_in">string</span> *properties; <span class="comment">// 学生属性</span></span><br><span class="line">		<span class="built_in">string</span> *hobbies; <span class="comment">// 学生爱好</span></span><br><span class="line">		<span class="keyword">int</span> dormitoryNumber; <span class="comment">// 寝室号码</span></span><br><span class="line">		<span class="keyword">int</span> size; <span class="comment">// 属性和爱好的个数</span></span><br><span class="line">		<span class="keyword">int</span> *standPlace; <span class="comment">// 标准爱好的位置</span></span><br><span class="line">		<span class="function"><span class="built_in">string</span> <span class="title">toString</span><span class="params">()</span> <span class="keyword">const</span></span>;  <span class="comment">// 返回学生信息</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 决策树结点类</span></span><br><span class="line">	<span class="keyword">class</span> Node</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Node(<span class="built_in">string</span> h = <span class="literal">nullptr</span>, Node *l = <span class="literal">nullptr</span>, Node *r = <span class="literal">nullptr</span>, <span class="built_in">list</span>&lt;Student&gt; *li = <span class="literal">nullptr</span>)</span><br><span class="line">			:hobby(h), lChild(l), rChild(r), <span class="built_in">list</span>(li)&#123;&#125;</span><br><span class="line">		<span class="built_in">string</span> hobby; <span class="comment">// 爱好</span></span><br><span class="line">		Node *lChild; <span class="comment">// 左儿子</span></span><br><span class="line">		Node *rChild; <span class="comment">// 右儿子</span></span><br><span class="line">		<span class="built_in">list</span>&lt;Student&gt; *<span class="built_in">list</span>; <span class="comment">// 链表存储学生</span></span><br><span class="line">	&#125;;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">buildDecisionTree</span><span class="params">()</span></span>; <span class="comment">// 构建决策树</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(Node* &amp;root, <span class="keyword">const</span> <span class="built_in">string</span> &amp;currentHobby, <span class="keyword">const</span> <span class="built_in">string</span> &amp;fatherHobby)</span></span>; <span class="comment">// 决策树插入结点</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">preorderTraversal</span><span class="params">(Node *root)</span> <span class="keyword">const</span></span>; <span class="comment">// 先序遍历决策树</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">insertStudent</span><span class="params">(Node* &amp;root, <span class="keyword">const</span> Student &amp;student)</span></span>; <span class="comment">// 在决策树中插入学生</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">printAllStudents</span><span class="params">(Node *root)</span></span>; <span class="comment">// 遍历所有学生</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">allocateRooms</span><span class="params">(Node *root, Student &amp;student)</span></span>; <span class="comment">// 单个学生分配寝室</span></span><br><span class="line">	<span class="function"><span class="built_in">string</span> <span class="title">calKeyOfStudent</span><span class="params">(Node *root, Student &amp;student, <span class="built_in">string</span> keyOfStudent)</span></span>; <span class="comment">// 计算学生爱好的链表的key</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">findRoommates</span><span class="params">(Student &amp;student, <span class="built_in">list</span>&lt;Student&gt;* l, <span class="keyword">int</span> degree)</span></span>; <span class="comment">// 寻找室友</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">enjoyScore</span><span class="params">(Student &amp;from, Student &amp;to)</span></span>; <span class="comment">// 2个同学之间的喜欢分数</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">findClosestKey</span><span class="params">(<span class="keyword">int</span> number, <span class="keyword">int</span> endNumber)</span></span>; <span class="comment">// 寻找最近的key,使用二进制全排列</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">everyAllocateRooms</span><span class="params">(Node *root)</span></span>; <span class="comment">// 所有同学分配寝室</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>; <span class="comment">// 输出当前二进制全排列</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">mysqlInsert</span><span class="params">()</span></span>; <span class="comment">// 数据库操作</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Node *root; <span class="comment">// 决策树根结点</span></span><br><span class="line">	<span class="keyword">int</span> studentNumber; <span class="comment">// 学生人数</span></span><br><span class="line">	<span class="built_in">string</span> *hobbies; <span class="comment">// 用于构建决策树的爱好</span></span><br><span class="line">	<span class="keyword">int</span> numberOfHobbies; <span class="comment">// 爱好的个数</span></span><br><span class="line">	<span class="keyword">int</span> *rooms; <span class="comment">// 所有寝室号</span></span><br><span class="line">	<span class="keyword">int</span> numberOfRooms; <span class="comment">// 寝室个数</span></span><br><span class="line">	Student currentStudent; <span class="comment">// 当前学生</span></span><br><span class="line">	<span class="built_in">list</span>&lt;Student&gt; *tempList; <span class="comment">// 4人寝室</span></span><br><span class="line">	<span class="built_in">map</span>&lt; <span class="built_in">string</span>, <span class="built_in">list</span>&lt;Student&gt;* &gt; mymap; <span class="comment">// 键值对</span></span><br><span class="line">	<span class="built_in">string</span> listId; <span class="comment">// 链表的id</span></span><br><span class="line">	<span class="built_in">string</span> *keys; <span class="comment">// 存储可能的key（用于二进制全排列）</span></span><br><span class="line">	<span class="keyword">int</span> currentPlaceOfKey; <span class="comment">// 用于二进制全排列</span></span><br><span class="line">	<span class="built_in">string</span> *tempKeys; <span class="comment">// 用于二进制全排列</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	DormitoryAllocate(<span class="built_in">string</span> *hobbies = <span class="literal">nullptr</span>, <span class="keyword">int</span> numberOfHobbies = <span class="number">0</span>, <span class="keyword">int</span> *rooms = <span class="literal">nullptr</span>, <span class="keyword">int</span> numberOfRooms = <span class="number">0</span>);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">preorderTraversal</span><span class="params">()</span> <span class="keyword">const</span></span>; <span class="comment">// 先序遍历决策树</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">insertStudent</span><span class="params">(<span class="keyword">long</span> studentId, <span class="built_in">string</span> studentName, <span class="built_in">string</span> *properties, <span class="built_in">string</span> *hobbies, <span class="keyword">int</span> *standPlace)</span></span>; <span class="comment">// 在决策树中插入学生</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">printAllStudents</span><span class="params">()</span></span>; <span class="comment">// 遍历所有学生</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">allocateRooms</span><span class="params">()</span></span>; <span class="comment">// 分配寝室</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p>cpp文件<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"DormitoryAllocate.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> DormitoryAllocate::Student::toString() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">stringstream</span> converter;</span><br><span class="line">	converter &lt;&lt; <span class="string">"姓名： "</span> &lt;&lt; <span class="keyword">this</span>-&gt;name &lt;&lt; <span class="string">"  学号： "</span> &lt;&lt; <span class="keyword">this</span>-&gt;studentId &lt;&lt; <span class="string">"  属性： "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		converter &lt;&lt; *(properties + i) &lt;&lt; <span class="string">"--&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	converter &lt;&lt; <span class="string">"  爱好:  "</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		converter &lt;&lt; *(hobbies + i) &lt;&lt; <span class="string">","</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	converter &lt;&lt; <span class="string">"  寝室号码： "</span> &lt;&lt; <span class="keyword">this</span>-&gt;dormitoryNumber;</span><br><span class="line">	<span class="keyword">return</span> converter.str();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DormitoryAllocate::Student::Student(<span class="keyword">const</span> Student &amp;s)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">this</span>-&gt;dormitoryNumber = s.dormitoryNumber;</span><br><span class="line">	<span class="keyword">this</span>-&gt;studentId = s.studentId;</span><br><span class="line">	<span class="keyword">this</span>-&gt;name = s.name;</span><br><span class="line">	<span class="keyword">this</span>-&gt;size = s.size;</span><br><span class="line">	<span class="keyword">this</span>-&gt;properties = <span class="keyword">new</span> <span class="built_in">string</span>[size];</span><br><span class="line">	<span class="keyword">this</span>-&gt;hobbies = <span class="keyword">new</span> <span class="built_in">string</span>[size];</span><br><span class="line">	<span class="keyword">this</span>-&gt;standPlace = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;properties[i] = s.properties[i];</span><br><span class="line">		<span class="keyword">this</span>-&gt;hobbies[i] = s.hobbies[i];</span><br><span class="line">		<span class="keyword">this</span>-&gt;standPlace[i] = s.standPlace[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::Student::<span class="keyword">operator</span>=(<span class="keyword">const</span> Student &amp;s)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> != &amp;s)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;dormitoryNumber = s.dormitoryNumber;</span><br><span class="line">		<span class="keyword">this</span>-&gt;studentId = s.studentId;</span><br><span class="line">		<span class="keyword">this</span>-&gt;name = s.name;</span><br><span class="line">		<span class="keyword">this</span>-&gt;size = s.size;</span><br><span class="line">		<span class="keyword">this</span>-&gt;properties = <span class="keyword">new</span> <span class="built_in">string</span>[size];</span><br><span class="line">		<span class="keyword">this</span>-&gt;hobbies = <span class="keyword">new</span> <span class="built_in">string</span>[size];</span><br><span class="line">		<span class="keyword">this</span>-&gt;standPlace = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;size; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;properties[i] = s.properties[i];</span><br><span class="line">			<span class="keyword">this</span>-&gt;hobbies[i] = s.hobbies[i];</span><br><span class="line">			<span class="keyword">this</span>-&gt;standPlace[i] = s.standPlace[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">DormitoryAllocate::DormitoryAllocate(<span class="built_in">string</span> *hobbies, <span class="keyword">int</span> numberOfHobbies, <span class="keyword">int</span> *rooms, <span class="keyword">int</span> numberOfRooms)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 初始化参数</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;hobbies = hobbies;</span><br><span class="line">	<span class="keyword">this</span>-&gt;numberOfHobbies = numberOfHobbies;</span><br><span class="line">	<span class="keyword">this</span>-&gt;rooms = rooms;</span><br><span class="line">	<span class="keyword">this</span>-&gt;numberOfRooms = numberOfRooms;</span><br><span class="line">	<span class="keyword">this</span>-&gt;root = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="keyword">this</span>-&gt;currentStudent = Student();</span><br><span class="line">	<span class="keyword">this</span>-&gt;tempList = <span class="keyword">new</span> <span class="built_in">list</span>&lt;Student&gt;;</span><br><span class="line">	<span class="keyword">this</span>-&gt;currentPlaceOfKey = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">this</span>-&gt;keys = <span class="keyword">new</span> <span class="built_in">string</span>[<span class="number">64</span>]; <span class="comment">// 最多支持7层爱好</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;tempKeys = <span class="keyword">new</span> <span class="built_in">string</span>[<span class="number">8</span>];</span><br><span class="line">	<span class="keyword">this</span>-&gt;studentNumber = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// 构建决策树</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;buildDecisionTree();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::buildDecisionTree()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 创建根结点</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;root = <span class="keyword">new</span> Node(<span class="keyword">this</span>-&gt;hobbies[<span class="number">0</span>], <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="keyword">this</span>-&gt;numberOfHobbies; i++) <span class="comment">// 插入其余结点</span></span><br><span class="line">	&#123;</span><br><span class="line">		insertNode(root, *(hobbies + i), *(hobbies + i - <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::insertNode(Node* &amp;root, <span class="keyword">const</span> <span class="built_in">string</span> &amp;currentHobby, <span class="keyword">const</span> <span class="built_in">string</span> &amp;fatherHobby)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 后序遍历插入结点</span></span><br><span class="line">	<span class="keyword">if</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		insertNode(root-&gt;lChild, currentHobby, fatherHobby);</span><br><span class="line">		insertNode(root-&gt;rChild, currentHobby, fatherHobby);</span><br><span class="line">		<span class="comment">// 遍历到父结点时，插入两个子结点</span></span><br><span class="line">		<span class="keyword">if</span> (root-&gt;hobby == fatherHobby &amp;&amp; root-&gt;lChild == <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			root-&gt;lChild = <span class="keyword">new</span> Node(currentHobby, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">			root-&gt;rChild = <span class="keyword">new</span> Node(currentHobby, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::preorderTraversal(Node *root) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; root-&gt;hobby &lt;&lt; <span class="string">"--&gt;"</span>;</span><br><span class="line">		preorderTraversal(root-&gt;lChild);</span><br><span class="line">		preorderTraversal(root-&gt;rChild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::preorderTraversal() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	preorderTraversal(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> DormitoryAllocate::insertStudent(Node* &amp;root, <span class="keyword">const</span> Student &amp;student)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">bool</span> isContainProperty = <span class="literal">false</span>; <span class="comment">// 该学生不包含该属性</span></span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="comment">// 如果该学生是某一类属性的第一位，则创建带链表的叶结点</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">list</span>&lt;Student&gt; *newlist = <span class="keyword">new</span> <span class="built_in">list</span>&lt;Student&gt;;</span><br><span class="line">		newlist-&gt;push_back(student);</span><br><span class="line">		root = <span class="keyword">new</span> Node(<span class="string">"find"</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, newlist);</span><br><span class="line">		mymap.insert(pair&lt; <span class="built_in">string</span>, <span class="built_in">list</span>&lt;Student&gt;* &gt;(listId, newlist)); <span class="comment">// 插入map</span></span><br><span class="line">		listId = <span class="string">""</span>; <span class="comment">// 重新初始化</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;<span class="built_in">list</span> != <span class="literal">nullptr</span>) <span class="comment">// 如果该学生不是某一类属性的第一位，则直接插入链表</span></span><br><span class="line">	&#123;</span><br><span class="line">		root-&gt;<span class="built_in">list</span>-&gt;push_back(student);</span><br><span class="line">		listId = <span class="string">""</span>; <span class="comment">// 重新初始化</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 判断学生的属性</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;numberOfHobbies; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (root-&gt;hobby == student.properties[i])</span><br><span class="line">			&#123;</span><br><span class="line">				isContainProperty = <span class="literal">true</span>; <span class="comment">// 该学生包含该属性</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (isContainProperty) <span class="comment">// 如果包含该属性，则插到其右子树</span></span><br><span class="line">		&#123;</span><br><span class="line">			listId = listId + <span class="string">"1"</span>;</span><br><span class="line">			<span class="keyword">return</span> insertStudent(root-&gt;rChild, student);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">else</span> <span class="comment">// 否则插入到其左子树</span></span><br><span class="line">		&#123;</span><br><span class="line">			listId = listId + <span class="string">"0"</span>;</span><br><span class="line">			<span class="keyword">return</span> insertStudent(root-&gt;lChild, student);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> DormitoryAllocate::insertStudent(<span class="keyword">long</span> studentId, <span class="built_in">string</span> studentName, <span class="built_in">string</span> *properties, <span class="built_in">string</span> *hobbies, <span class="keyword">int</span> *standPlace)</span><br><span class="line">&#123;</span><br><span class="line">	studentNumber++;</span><br><span class="line">	<span class="keyword">return</span> insertStudent(<span class="keyword">this</span>-&gt;root, Student(studentId, studentName, properties, hobbies, <span class="keyword">this</span>-&gt;numberOfHobbies, <span class="number">0</span>, standPlace));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::printAllStudents(Node *root)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		printAllStudents(root-&gt;lChild);</span><br><span class="line">		printAllStudents(root-&gt;rChild);</span><br><span class="line">		<span class="keyword">if</span> (root-&gt;<span class="built_in">list</span> != <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 迭代遍历链表</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator iter = root-&gt;<span class="built_in">list</span>-&gt;begin(); iter != root-&gt;<span class="built_in">list</span>-&gt;end(); iter++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; (*iter).toString() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::printAllStudents()</span><br><span class="line">&#123;</span><br><span class="line">	printAllStudents(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::allocateRooms(Node *root, Student &amp;student)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//cout &lt;&lt; "----------------------寻找链表--------------------" &lt;&lt; endl;</span></span><br><span class="line">	<span class="keyword">int</span> indexOfHobbies = <span class="number">-1</span>;</span><br><span class="line">	<span class="built_in">string</span> key; <span class="comment">// 该学生对链表的key</span></span><br><span class="line">	<span class="keyword">int</span> degree = <span class="number">5</span>; <span class="comment">// 喜欢阈值</span></span><br><span class="line">	tempList-&gt;push_back(student);</span><br><span class="line">	<span class="keyword">bool</span> isCompleted = <span class="literal">false</span>; <span class="comment">// 是否已找到所有室友</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">Student <span class="title">temp</span><span class="params">(student)</span></span>; <span class="comment">// 复制学生的爱好信息</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//cout &lt;&lt; "当前爱好索引：" &lt;&lt; indexOfHobbies &lt;&lt; endl;</span></span><br><span class="line">		<span class="keyword">if</span> (indexOfHobbies &gt;= <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 去除权重最低的爱好重新计算key</span></span><br><span class="line">			<span class="keyword">if</span> (temp.hobbies[indexOfHobbies] == <span class="keyword">this</span>-&gt;hobbies[temp.standPlace[indexOfHobbies]])</span><br><span class="line">				temp.hobbies[indexOfHobbies] = <span class="string">" "</span> + temp.hobbies[indexOfHobbies];</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				temp.hobbies[indexOfHobbies] = <span class="keyword">this</span>-&gt;hobbies[temp.standPlace[indexOfHobbies]];</span><br><span class="line">			key = calKeyOfStudent(<span class="keyword">this</span>-&gt;root, temp, <span class="string">""</span>);</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "最优key: " &lt;&lt; key &lt;&lt; endl;</span></span><br><span class="line">			<span class="comment">//map&lt; string, list&lt;Student&gt; &gt;::iterator iter = mymap.find(key);</span></span><br><span class="line">			<span class="comment">//if (iter == mymap.end()) // 当前层次无法找到</span></span><br><span class="line">			<span class="comment">//&#123;</span></span><br><span class="line">			<span class="comment">//	// 不做任何事，等待重新计算key</span></span><br><span class="line">			<span class="comment">//&#125;</span></span><br><span class="line">			<span class="comment">//else // 找到可选室友链表</span></span><br><span class="line">			<span class="comment">//	if (findRoommates(temp, &amp;(iter-&gt;second), degree))</span></span><br><span class="line">			<span class="comment">//		break;</span></span><br><span class="line">			<span class="built_in">string</span> last = key.erase(<span class="number">0</span>, indexOfHobbies + <span class="number">1</span>); <span class="comment">// 提取出key的后半段</span></span><br><span class="line">			findClosestKey(<span class="number">0</span>, indexOfHobbies + <span class="number">1</span>); <span class="comment">// 得到最近的key合集</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentPlaceOfKey; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				key = keys[i] + last; <span class="comment">// 得到最近的key</span></span><br><span class="line">				<span class="comment">//cout &lt;&lt; "重组后key: " &lt;&lt; key &lt;&lt; endl;</span></span><br><span class="line">				<span class="built_in">map</span>&lt; <span class="built_in">string</span>, <span class="built_in">list</span>&lt;Student&gt;* &gt;::iterator iter = mymap.find(key);</span><br><span class="line">				<span class="keyword">if</span> (iter == mymap.end()) <span class="comment">// 当前层次无法找到</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">// 不做任何事，等待重新计算key</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="comment">// 找到可选室友链表</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">/*cout &lt;&lt; "testbegin---------------------------------test" &lt;&lt; endl;</span><br><span class="line">					for (list&lt;Student&gt;::iterator it = iter-&gt;second-&gt;begin(); it != iter-&gt;second-&gt;end(); it++)</span><br><span class="line">					&#123;</span><br><span class="line">						cout &lt;&lt; it-&gt;name &lt;&lt; endl;</span><br><span class="line">					&#125;</span><br><span class="line">					cout &lt;&lt; "testend---------------------------------test" &lt;&lt; endl;*/</span></span><br><span class="line">					<span class="keyword">if</span> (findRoommates(temp, iter-&gt;second, degree))</span><br><span class="line">					&#123;</span><br><span class="line">						isCompleted = <span class="literal">true</span>;</span><br><span class="line">						<span class="comment">// 重新初始化二进制全排列</span></span><br><span class="line">						<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentPlaceOfKey; i++)</span><br><span class="line">						&#123;</span><br><span class="line">							keys[i] = <span class="string">""</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						currentPlaceOfKey = <span class="number">0</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">					</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 重新初始化二进制全排列</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentPlaceOfKey; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				keys[i] = <span class="string">""</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			currentPlaceOfKey = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			key = calKeyOfStudent(<span class="keyword">this</span>-&gt;root, student, <span class="string">""</span>);</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "最优key: " &lt;&lt; key &lt;&lt; endl;</span></span><br><span class="line">			<span class="built_in">map</span>&lt; <span class="built_in">string</span>, <span class="built_in">list</span>&lt;Student&gt;* &gt;::iterator iter = mymap.find(key);</span><br><span class="line">			<span class="keyword">if</span> (iter == mymap.end()) <span class="comment">// 当前层次无法找到</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 不做任何事，等待重新计算key</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="comment">// 找到可选室友链表</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//cout &lt;&lt; "testbegin---------------------------------test" &lt;&lt; endl;</span></span><br><span class="line">				<span class="comment">//for (list&lt;Student&gt;::iterator it = iter-&gt;second-&gt;begin(); it != iter-&gt;second-&gt;end();it++)</span></span><br><span class="line">				<span class="comment">//&#123;</span></span><br><span class="line">				<span class="comment">//	cout &lt;&lt; it-&gt;name &lt;&lt; endl;</span></span><br><span class="line">				<span class="comment">//&#125;</span></span><br><span class="line">				<span class="comment">//cout &lt;&lt; "testend---------------------------------test" &lt;&lt; endl;</span></span><br><span class="line">				<span class="keyword">if</span> (findRoommates(temp, iter-&gt;second, degree))</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">				</span><br><span class="line">				</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (isCompleted) <span class="comment">// 如果已找到室友，则分配完毕</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "分配完毕" &lt;&lt; endl;</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		indexOfHobbies++;</span><br><span class="line">		</span><br><span class="line">				</span><br><span class="line">		<span class="keyword">if</span> (degree &lt; <span class="number">0</span>) <span class="comment">// 总人数不是4的倍数</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "---------------------人数不够，无法分配寝室--------------------------------" &lt;&lt; endl;</span></span><br><span class="line">			<span class="comment">// 不足四个人的时候同样分配为同一个寝室</span></span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"----------------------------------------------------------------------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"人数不足4人，以下同学分为一个寝室"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"寝室号： "</span> &lt;&lt; rooms[<span class="keyword">this</span>-&gt;numberOfRooms - <span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"寝室人员："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator it = tempList-&gt;begin(); it != tempList-&gt;end(); it++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; (*it).name &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">				(*it).dormitoryNumber = rooms[<span class="keyword">this</span>-&gt;numberOfRooms - <span class="number">1</span>]; <span class="comment">// 分配寝室</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">this</span>-&gt;numberOfRooms--;</span><br><span class="line">			tempList-&gt;clear();</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果无法找到喜欢的，则降低喜欢分数阈值</span></span><br><span class="line">		<span class="keyword">if</span> (indexOfHobbies == <span class="keyword">this</span>-&gt;numberOfHobbies) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "开始降低阈值：" &lt;&lt; degree - 1 &lt;&lt; endl;</span></span><br><span class="line">			degree--;</span><br><span class="line">			indexOfHobbies = <span class="number">-1</span>;</span><br><span class="line">			key = <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> DormitoryAllocate::calKeyOfStudent(Node *root, Student &amp;student, <span class="built_in">string</span> keyOfStudent)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">bool</span> isContainHobby = <span class="literal">false</span>; <span class="comment">// 该学生不包含该爱好</span></span><br><span class="line">	<span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> keyOfStudent;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (root-&gt;<span class="built_in">list</span> != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> keyOfStudent;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 判断学生的爱好</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>-&gt;numberOfHobbies; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (root-&gt;hobby == student.hobbies[i])</span><br><span class="line">			&#123;</span><br><span class="line">				isContainHobby = <span class="literal">true</span>; <span class="comment">// 该学生包含该爱好</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (isContainHobby) <span class="comment">// 如果包含该爱好，向右子树寻找</span></span><br><span class="line">		&#123;</span><br><span class="line">			keyOfStudent = keyOfStudent + <span class="string">"1"</span>;</span><br><span class="line">			<span class="keyword">return</span> calKeyOfStudent(root-&gt;rChild, student, keyOfStudent);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">else</span> <span class="comment">// 否则向左子树寻找</span></span><br><span class="line">		&#123;</span><br><span class="line">			keyOfStudent = keyOfStudent + <span class="string">"0"</span>;</span><br><span class="line">			<span class="keyword">return</span> calKeyOfStudent(root-&gt;lChild, student, keyOfStudent);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> DormitoryAllocate::findRoommates(Student &amp;student, <span class="built_in">list</span>&lt;Student&gt;* l, <span class="keyword">int</span> degree)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; "----------------------已找到链表，开始寻找室友-----------------" &lt;&lt; endl;</span></span><br><span class="line">	<span class="keyword">bool</span> isOK = <span class="literal">true</span>; <span class="comment">// 能否成为室友</span></span><br><span class="line">	<span class="keyword">bool</span> isCompleted = <span class="literal">false</span>; <span class="comment">// 是否已经完成寻找</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator iter = l-&gt;begin(); iter != l-&gt;end();)</span><br><span class="line">	&#123;</span><br><span class="line">		Student from = *iter;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; "链表中的学生：" &lt;&lt; from.name &lt;&lt; endl;</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator it = tempList-&gt;begin(); it != tempList-&gt;end(); it++)</span><br><span class="line">		&#123;</span><br><span class="line">			Student to = *it;</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "当前阈值为：" &lt;&lt; degree &lt;&lt; endl;</span></span><br><span class="line">			<span class="keyword">if</span> (enjoyScore(from, to) &lt; degree || enjoyScore(to, from) &lt; degree) <span class="comment">// 如果两个人互相不喜欢，则无法成为室友</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//cout &lt;&lt; "无法成为室友, 寻找下一个室友" &lt;&lt; endl;</span></span><br><span class="line">				isOK = <span class="literal">false</span>; <span class="comment">// 无法成为室友，换下一个人</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (isOK) <span class="comment">// 如果能成为室友，则将该同学加入到list</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "可以成为室友，增加该同学" &lt;&lt; endl;</span></span><br><span class="line">			tempList-&gt;push_back(from);</span><br><span class="line">			<span class="comment">//cout &lt;&lt; "当前寝室人数： " &lt;&lt; tempList-&gt;size() &lt;&lt; endl;</span></span><br><span class="line">			studentNumber--; <span class="comment">// 学生总人数减一</span></span><br><span class="line">			l-&gt;erase(iter++); <span class="comment">// 将该同学从map和决策树中删除</span></span><br><span class="line">			<span class="comment">//printAllStudents();</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			isOK = <span class="literal">true</span>;</span><br><span class="line">			iter++;</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">if</span> (tempList-&gt;size() == <span class="number">4</span>) <span class="comment">// 如果已组成一个寝室，则返回完成，否则未完成</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"----------------------------------------------------------------------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"寝室号： "</span> &lt;&lt; rooms[<span class="keyword">this</span>-&gt;numberOfRooms - <span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"寝室人员："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator it = tempList-&gt;begin(); it != tempList-&gt;end(); it++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; (*it).name &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">				(*it).dormitoryNumber = rooms[<span class="keyword">this</span>-&gt;numberOfRooms - <span class="number">1</span>]; <span class="comment">// 分配寝室</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			<span class="comment">// -------------------------数据库操作-----------------------</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">//mysqlInsert();</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">// -------------------------数据库操作-----------------------</span></span><br><span class="line">			<span class="keyword">this</span>-&gt;numberOfRooms--;</span><br><span class="line">			tempList-&gt;clear();</span><br><span class="line">			isCompleted = <span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> isCompleted;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> DormitoryAllocate::enjoyScore(Student &amp;from, Student &amp;to)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//cout &lt;&lt; "---------------开始进行喜欢度判断-----------" &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">// 属性的顺序和stand爱好顺序相同, 学生爱好的优先级从小到大</span></span><br><span class="line">	<span class="built_in">string</span> *from_hobbies = from.hobbies;</span><br><span class="line">	<span class="keyword">int</span> score = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numberOfHobbies; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numberOfHobbies; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (to.properties[j] == from.hobbies[i]) <span class="comment">// 如果to同学满足from的当前爱好</span></span><br><span class="line">				score += i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//cout &lt;&lt; from.name &lt;&lt; "对" &lt;&lt; to.name &lt;&lt; "的喜欢分数为: " &lt;&lt; score &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; "---------------喜欢度判断结束-------------" &lt;&lt; endl;</span></span><br><span class="line">	<span class="keyword">return</span> score;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::allocateRooms()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/*for (list&lt;Student&gt;::iterator it = students-&gt;begin(); it != students-&gt;end(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		allocateRooms(this-&gt;root, *it);</span><br><span class="line">	&#125;*/</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//allocateRooms(this-&gt;root, students-&gt;front());</span></span><br><span class="line"></span><br><span class="line">	everyAllocateRooms(<span class="keyword">this</span>-&gt;root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::everyAllocateRooms(Node *root)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		everyAllocateRooms(root-&gt;lChild);</span><br><span class="line">		everyAllocateRooms(root-&gt;rChild);</span><br><span class="line">		<span class="keyword">if</span> (root-&gt;<span class="built_in">list</span> != <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 迭代遍历链表</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">list</span>&lt;Student&gt;::iterator iter = root-&gt;<span class="built_in">list</span>-&gt;begin(); iter != root-&gt;<span class="built_in">list</span>-&gt;end();)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 每次寻找室友前先将自己从决策树中删除</span></span><br><span class="line">				currentStudent = *iter;</span><br><span class="line">				studentNumber--;</span><br><span class="line">				root-&gt;<span class="built_in">list</span>-&gt;erase(iter++); <span class="comment">// 将该同学从map和决策树中删除</span></span><br><span class="line">				allocateRooms(<span class="keyword">this</span>-&gt;root, currentStudent);</span><br><span class="line">				<span class="comment">//printAllStudents();</span></span><br><span class="line">				<span class="keyword">if</span> (studentNumber == <span class="number">0</span>)</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// number从0开始，endNumber代表二进制位数</span></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::findClosestKey(<span class="keyword">int</span> number, <span class="keyword">int</span> endNumer)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (number == endNumer)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">string</span> s;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; endNumer;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			s = s + tempKeys[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">this</span>-&gt;keys[<span class="keyword">this</span>-&gt;currentPlaceOfKey++] = s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">1</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				tempKeys[number] = <span class="string">"0"</span>;</span><br><span class="line">				findClosestKey(number + <span class="number">1</span>, endNumer);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				tempKeys[number] = <span class="string">"1"</span>;</span><br><span class="line">				findClosestKey(number + <span class="number">1</span>, endNumer);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::print()</span><br><span class="line">&#123;</span><br><span class="line">	findClosestKey(<span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentPlaceOfKey; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; keys[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> DormitoryAllocate::mysqlInsert()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// pass</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>这个系统的设计其实还是有许多的问题的，但是现阶段的我只能做到这里了，毕竟写到这里我也花了很多的精力，看来我还要加紧的学习数据结构！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/07/Python-验证码识别/" rel="next" title="Python-验证码识别">
+                <i class="fa fa-chevron-left"></i> Python-验证码识别
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/17/数据结构-大学生智能寝室分配系统/"
+           data-title="数据结构-大学生智能寝室分配系统" data-url="http://yoursite.com/2016/05/17/数据结构-大学生智能寝室分配系统/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ZhangZheng" />
+          <p class="site-author-name" itemprop="name">ZhangZheng</p>
+          <p class="site-description motion-element" itemprop="description">Personal blog, software developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思路"><span class="nav-number">1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码流程"><span class="nav-number">2.</span> <span class="nav-text">代码流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangZheng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzcoder"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
