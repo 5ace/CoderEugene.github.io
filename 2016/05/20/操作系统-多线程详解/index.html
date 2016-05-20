@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ubuntu,基本操作," />
+  <meta name="keywords" content="操作系统,多线程," />
 
 
 
@@ -57,18 +57,18 @@
 
 
 
-<meta name="description" content="简单的讲述一些比较基础并且比较常用和重要的操作指令，尽快熟悉这些指令可以让我们更快的熟悉linux">
+<meta name="description" content="线程的应用十分广，它可以满足我们对于多任务的需求，所以深刻地理解线程是十分重要的，但是在我查阅操作系统的时候总理解的不是很透彻，经过查阅相关资料将总结心得记录在此，内容很有可能会出现错误，欢迎指正！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux基础-基本操作指令">
-<meta property="og:url" content="http://yoursite.com/2016/04/01/Linux基础-基本操作指令/index.html">
+<meta property="og:title" content="操作系统-多线程详解">
+<meta property="og:url" content="http://yoursite.com/2016/05/20/操作系统-多线程详解/index.html">
 <meta property="og:site_name" content="EUAdvancer">
-<meta property="og:description" content="简单的讲述一些比较基础并且比较常用和重要的操作指令，尽快熟悉这些指令可以让我们更快的熟悉linux">
-<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/fourthpicture.jpg">
-<meta property="og:updated_time" content="2016-04-01T06:10:11.557Z">
+<meta property="og:description" content="线程的应用十分广，它可以满足我们对于多任务的需求，所以深刻地理解线程是十分重要的，但是在我查阅操作系统的时候总理解的不是很透彻，经过查阅相关资料将总结心得记录在此，内容很有可能会出现错误，欢迎指正！">
+<meta property="og:image" content="http://7xryau.com1.z0.glb.clouddn.com/bg14.jpg">
+<meta property="og:updated_time" content="2016-05-20T05:26:31.528Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux基础-基本操作指令">
-<meta name="twitter:description" content="简单的讲述一些比较基础并且比较常用和重要的操作指令，尽快熟悉这些指令可以让我们更快的熟悉linux">
-<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/fourthpicture.jpg">
+<meta name="twitter:title" content="操作系统-多线程详解">
+<meta name="twitter:description" content="线程的应用十分广，它可以满足我们对于多任务的需求，所以深刻地理解线程是十分重要的，但是在我查阅操作系统的时候总理解的不是很透彻，经过查阅相关资料将总结心得记录在此，内容很有可能会出现错误，欢迎指正！">
+<meta name="twitter:image" content="http://7xryau.com1.z0.glb.clouddn.com/bg14.jpg">
 
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> Linux基础-基本操作指令 | EUAdvancer </title>
+  <title> 操作系统-多线程详解 | EUAdvancer </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +236,7 @@
             
             
               
-                Linux基础-基本操作指令
+                操作系统-多线程详解
               
             
           </h1>
@@ -248,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-01T14:01:09+08:00" content="2016-04-01">
-              2016-04-01
+            <time itemprop="dateCreated" datetime="2016-05-20T13:22:12+08:00" content="2016-05-20">
+              2016-05-20
             </time>
           </span>
 
@@ -262,8 +262,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -278,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/01/Linux基础-基本操作指令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/01/Linux基础-基本操作指令/" itemprop="commentsCount"></span>
+                <a href="/2016/05/20/操作系统-多线程详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/20/操作系统-多线程详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -301,28 +301,57 @@
       
 
       
-        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/fourthpicture.jpg" alt="bg"><br>简单的讲述一些比较基础并且比较常用和重要的操作指令，尽快熟悉这些指令可以让我们更快的熟悉linux<br><a id="more"></a></p>
-<h3 id="使用文字登录界面"><a href="#使用文字登录界面" class="headerlink" title="使用文字登录界面"></a>使用文字登录界面</h3><ul>
-<li>Linux预设的情况下会提供六个Terminal来让使用者登入， 切换的方式为使用：[Ctrl] + [Alt] + [F1]~[F6]的组合按钮，它们分别对应文字接口登入 tty1 ~ tty6 终端机（执行等级run level 3)</li>
-<li>[Ctrl] + [Alt] + [F7]   ：切换回图形接口桌面（执行等级run level 5）</li>
-<li>经过小伙伴的提醒，由于我下载的是有图形界面的，通过[Ctrl] + [Alt] + [T]来打开控制台会好一些，会有高亮等功能</li>
+        <p><img src="http://7xryau.com1.z0.glb.clouddn.com/bg14.jpg" alt="bg"><br>线程的应用十分广，它可以满足我们对于多任务的需求，所以深刻地理解线程是十分重要的，但是在我查阅操作系统的时候总理解的不是很透彻，经过查阅相关资料将总结心得记录在此，内容很有可能会出现错误，欢迎指正！<br><a id="more"></a></p>
+<h3 id="线程的分类"><a href="#线程的分类" class="headerlink" title="线程的分类"></a>线程的分类</h3><ul>
+<li><strong>用户线程</strong><ol>
+<li>用户线程受内核支持，但无须内核管理</li>
+<li>由进程利用线程库创建，释放和管理，因此内核对用户线程不可知，内核只会负责用户线程的进程以及轻量级进程的调度，而不会消耗其他内核资源。</li>
+<li>因为上下文切换不需要内核干预，所以可以省去用户线程进出内核态的消耗</li>
+<li>由于用户线程在用户空间中实现，所以一个用户线程如果阻塞在系统调用中，则整个进程都将会阻塞，原因和下面的多对一模型类似</li>
+</ol>
+</li>
+<li><strong>内核线程</strong><ol>
+<li>由操作系统直接支持，管理和调度，通过系统调用完成</li>
+</ol>
+</li>
 </ul>
-<h3 id="创建root管理员"><a href="#创建root管理员" class="headerlink" title="创建root管理员"></a>创建root管理员</h3><ul>
-<li>首先先进入其中一个文字登录界面，登陆当前账号，输入当前用户密码</li>
-<li>在终端输入 [sudo passwd root]</li>
-<li>输入你的当前密码</li>
-<li>成功后输2次密码，改密码为你的root密码</li>
-<li>在终端输入 [su root] ，然后输入root密码，这时候就获得了root权限</li>
+<h3 id="线程库"><a href="#线程库" class="headerlink" title="线程库"></a>线程库</h3><p>从上面的用户线程介绍可以看出用户线程是通过线程库创建管理的，何谓线程库？</p>
+<blockquote>
+<p>线程库为程序员提供创建和管理线程的API，实现方式主要有两种:<br>1.在用户空间提供一个没有内核支持的库，此库的所有代码和数据都存在于用户空间中，调用库中的函数不是系统调用（POSIX Pthread）<br>2.执行一个由操作系统直接支持的内核级的库，调用库中的API函数会对内核的系统调用（win32）</p>
+</blockquote>
+<p>所以我们所熟知的编程语言创建的线程都是用户线程，线程的调度都是由线程库函数来实现，os并不知道线程的存在，所以比起内核线程来说极其快速且低消耗的</p>
+<h3 id="用户线程与内核线程的通信"><a href="#用户线程与内核线程的通信" class="headerlink" title="用户线程与内核线程的通信"></a>用户线程与内核线程的通信</h3><p>在多对多模型中，为了能让用户线程能在cpu上运行，内核和线程库之间的通信问题需要用到轻量级进程（LWP），每个LWP与内核线程相连，该内核线程会被操作系统调度到物理处理器上运行，当内核调度到物理处理器上运行时，与该 LWP 关联的用户线程就被执行。  </p>
+<blockquote>
+<p>线程库调用用户级线程到一个有效的LWP上运行，因为竞争发生在相同进程的线程之间，所以称为进程竞争范围；操作系统将内核线程到有效的物理CPU上的竞争为系统竞争范围</p>
+</blockquote>
+<h3 id="用户线程与内核线程关系模型"><a href="#用户线程与内核线程关系模型" class="headerlink" title="用户线程与内核线程关系模型"></a>用户线程与内核线程关系模型</h3><ul>
+<li><strong>多对一模型</strong><ul>
+<li>特点：多个用户级线程映射到一个内核线程</li>
+<li>优势：由于线程的管理调度室由线程库在用户空间进程的，所以效率比较高</li>
+<li>缺点：由于多个用户线程通过一个LWP连接内核线程，所以当某一个线程阻塞时，会阻塞该LWP，从而导致整个进程的阻塞</li>
 </ul>
-<h3 id="控制台输出中文"><a href="#控制台输出中文" class="headerlink" title="控制台输出中文"></a>控制台输出中文</h3><p>[Ctrl] + [Alt] + [T]来打开控制台,输入 [LANG=zh_CN.utf-8] 就可以正常显示中文（可以输入cal日历指令来检测是否输出成功）</p>
-<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><p>进入文字登陆界面,输入以下指令<br>   <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[shutdown -h now] : 立即关机</span><br><span class="line">[shutdown -h +10] : 10分钟后关机</span><br><span class="line">[shutdown -h 20:25] : 系统在今天的 20:25 分会关机，若在21:25才下达此命令，则隔天才关机</span><br><span class="line">[shutdown -r now] : 系统立刻重新启动</span><br><span class="line">[shutdown -r +30 <span class="string">'The system will reboot'</span>] : 再过三十分钟系统会重新启劢，幵显示后面的讯息给所有在在线的使用者</span><br><span class="line">[shutdown -k now <span class="string">'This system will reboot'</span>] : 仅发出警告信件的参数！系统马上会关机啦！吓唬人！</span><br></pre></td></tr></table></figure></p>
-<h3 id="cd命令：变换目录"><a href="#cd命令：变换目录" class="headerlink" title="cd命令：变换目录"></a>cd命令：变换目录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">cd</span> .] = [<span class="built_in">cd</span> ./] ：变换到此层目录（不变）</span><br><span class="line">[<span class="built_in">cd</span> ..] = [<span class="built_in">cd</span> ../] ：变换到上层目录</span><br><span class="line">[<span class="built_in">cd</span>] = [<span class="built_in">cd</span> ~] ：变换到目前用户的 /home/账户名 目录</span><br><span class="line">[<span class="built_in">cd</span> ~账户名] ：变换到 /home/账户名 目录</span><br><span class="line">[<span class="built_in">cd</span> -] ：变换到进入此目录之前所在的目录</span><br></pre></td></tr></table></figure>
-<h3 id="简单的文本编辑器：nano"><a href="#简单的文本编辑器：nano" class="headerlink" title="简单的文本编辑器：nano"></a>简单的文本编辑器：nano</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[nano 文件名] ：创建一个新的文本，如果已存在则开启原来的文本</span><br><span class="line">ctrl + x ：离开naon软件，若有修改过档案会提示是否需要储存（输入y，并enter则保存退出，输入n，并enter则不保存退出）</span><br></pre></td></tr></table></figure>
-<h3 id="cp命令：拷贝文件"><a href="#cp命令：拷贝文件" class="headerlink" title="cp命令：拷贝文件"></a>cp命令：拷贝文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">格式：cp [参数] 来源文件(<span class="built_in">source</span>) 目标文件(destination) </span><br><span class="line">[-i] ：若目标文件已经存在时，在覆盖时会先询问动作的进行</span><br><span class="line">[-p] ：连同档案的属性一起复制过去</span><br><span class="line">[-r] ：递归持续复制，用于目录的复制行为</span><br><span class="line">[<span class="_">-s</span>] ：建立一个连结档（快捷方式）</span><br><span class="line">[<span class="_">-d</span>] ：如果来源档案是链接档案</span><br><span class="line">[<span class="_">-a</span>] ：相当于-pdr（可以完整保留属性）</span><br><span class="line">1. 如果来源档案是链接档案（连结档）</span><br><span class="line">          如果没有加上任何选项时，cp复制的是源文件，</span><br><span class="line">          如果加上<span class="_">-d</span>，复制的是链接文件的属性（连结档）</span><br><span class="line">2. 如果来源是目录</span><br><span class="line">          如果加上-r，可以复制，但会改权限</span><br><span class="line">          如果加上<span class="_">-a</span>，可以复制，并且不会改权限，但如果当前账户没有修改来源档案的权限，则会改权限</span><br></pre></td></tr></table></figure>
-<h3 id="rm命令：删除文件"><a href="#rm命令：删除文件" class="headerlink" title="rm命令：删除文件"></a>rm命令：删除文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：rm [-fir] 档案或目录</span><br><span class="line">[-r] ：删除目录</span><br></pre></td></tr></table></figure>
-<h3 id="mv命令：移动文件，重命名"><a href="#mv命令：移动文件，重命名" class="headerlink" title="mv命令：移动文件，重命名"></a>mv命令：移动文件，重命名</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：mv [-fiu] 来源文件1(<span class="built_in">source</span>) 来源文件2(<span class="built_in">source</span>) 目标文件(destination)</span><br><span class="line">若目标文件不存在，则是重命名</span><br></pre></td></tr></table></figure>
-<h3 id="mkdir命令：创建新目录"><a href="#mkdir命令：创建新目录" class="headerlink" title="mkdir命令：创建新目录"></a>mkdir命令：创建新目录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">格式：mkdir [-mp] 目录名称</span><br><span class="line">[-m] ：设置权限 （例：mkdir -m 711 <span class="built_in">test</span>2 ）</span><br><span class="line">[-p] ：建立多层目录</span><br></pre></td></tr></table></figure>
-<h3 id="man命令：查询指令的用法及参数"><a href="#man命令：查询指令的用法及参数" class="headerlink" title="man命令：查询指令的用法及参数"></a>man命令：查询指令的用法及参数</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：man 指令名</span><br><span class="line">[空格键/下方向键] ：向下翻页</span><br><span class="line">[上方向键] ：向上翻页</span><br><span class="line">[HOME键] ：回到第一页</span><br><span class="line">[END键] ：转到最后一面</span><br><span class="line">进入man后，输入[/], 后面接的就是要搜索的关键词 ： man中向下搜索关键词（n来搜索下一个位置，N来所有上一个位置）</span><br><span class="line">进入man后，输入[?]，后面接的就是要搜索的关键词 ： man中向上搜索关键词（n来搜索下一个位置，N来所有上一个位置）</span><br></pre></td></tr></table></figure>
+</li>
+<li><strong>一对一模型</strong><ul>
+<li>特点：一个用户线程映射到一个内核线程</li>
+<li>优势：提供了更好的并发功能，由于不同的内核线程可以在cpu的不同核心上，所以允许多个线程并行地运行在多处理器系统上</li>
+<li>缺点：由于每创建一个用户线程都需要创建一个相应的内核线程，所以创建内核线程的开销会影响应用程序的性能，从而限制系统所支持的线程数量</li>
+</ul>
+</li>
+<li><strong>多对多模型</strong><ul>
+<li>特点：多个用户线程映射到多个内核线程</li>
+<li>优势：解决了上述两种模型的缺点</li>
+<li>缺点：复杂？？？其实关于这点我也不清楚</li>
+</ul>
+</li>
+</ul>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><blockquote>
+<p>在进程开始时创建一定数量的线程，并放入池中以等待工作。当服务器收到请求时，它会唤醒池中的一个线程（如果有可用的线程，并将要处理的请求传递给它。一旦线程完成了服务，它会返回池中再等待工作。如果池中没有可用的线程，那么服务器会一直等到直到有空线程为止</p>
+</blockquote>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p>Q：为什么需要线程池？<br>A：因为多线程对于所有并发线程都创建一个新线程，这样无法限制在系统中的并发执行的线程数量，从而导致系统大部分时间忙于上下文切换耗尽系统资源，所以使用线程池可以使用现有线程处理请求，同时线程池可以限制可用线程的数量，对于不能支持大量并发的系统非常重要</p>
+<p>Q：如何合理的设置线程池的大小？<br>A：为了减少不必要的线程上下文切换开销，如果是IO密集型应用，为防止出现阻塞状态线程池大小可以多一些，线程池大小一般可设为CPU核心数*2+1；如果是cpu密集型应用，线程池大小可设为cpu核心数+1【当然，这只是估算】</p>
+<p>Q：为什么多对多模型可以解决另外两种模型的缺点呢？<br>A：其实我们可以这么来看，在多对一模型中，由于只有一个内核线程，某一线程的阻塞容易引起进程的阻塞，但是在多对多模型中，用户线程的数量可以映射到相同数量或者更少数量的内核线程，当某一个线程阻塞时，其他的线程可以使用其他的LWP来联系内核线程，所以不会导致进程的阻塞；而对于一对一模型的线程数量限制，在多对多模型中，不需要为每个用户线程创建一个内核进程，这极大的缩小了内核线程创建的开销</p>
+<p>Q：多线程编程可以利用多核cpu吗？<br>A：可以，单进程的每个线程都会有一个对应的内核线程，如果线程数小于cpu核心数，线程是可以并行的，但是当线程数超出cpu核心数时，还是会出现并发的【python不在此列，由于GIL（全局解释锁）的存在，python的多线程是无法利用多核的，但是可以通过多进程的方式实现】</p>
+
       
     </div>
 
@@ -336,9 +365,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ubuntu/" rel="tag">#ubuntu</a>
+            <a href="/tags/操作系统/" rel="tag">#操作系统</a>
           
-            <a href="/tags/基本操作/" rel="tag">#基本操作</a>
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -347,17 +376,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/24/Ubuntu14.04+win10双系统安装步骤/" rel="next" title="Ubuntu14.04+win10双系统安装步骤">
-                <i class="fa fa-chevron-left"></i> Ubuntu14.04+win10双系统安装步骤
+              <a href="/2016/05/17/数据结构-大学生智能寝室分配系统/" rel="next" title="数据结构-大学生智能寝室分配系统">
+                <i class="fa fa-chevron-left"></i> 数据结构-大学生智能寝室分配系统
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/04/Python-开发工具-准备基础知识/" rel="prev" title="Python-开发工具+准备基础知识">
-                Python-开发工具+准备基础知识 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,8 +431,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/01/Linux基础-基本操作指令/"
-           data-title="Linux基础-基本操作指令" data-url="http://yoursite.com/2016/04/01/Linux基础-基本操作指令/">
+      <div class="ds-thread" data-thread-key="2016/05/20/操作系统-多线程详解/"
+           data-title="操作系统-多线程详解" data-url="http://yoursite.com/2016/05/20/操作系统-多线程详解/">
       </div>
     
   </div>
@@ -503,7 +528,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用文字登录界面"><span class="nav-number">1.</span> <span class="nav-text">使用文字登录界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建root管理员"><span class="nav-number">2.</span> <span class="nav-text">创建root管理员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制台输出中文"><span class="nav-number">3.</span> <span class="nav-text">控制台输出中文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关机"><span class="nav-number">4.</span> <span class="nav-text">关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd命令：变换目录"><span class="nav-number">5.</span> <span class="nav-text">cd命令：变换目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的文本编辑器：nano"><span class="nav-number">6.</span> <span class="nav-text">简单的文本编辑器：nano</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp命令：拷贝文件"><span class="nav-number">7.</span> <span class="nav-text">cp命令：拷贝文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm命令：删除文件"><span class="nav-number">8.</span> <span class="nav-text">rm命令：删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv命令：移动文件，重命名"><span class="nav-number">9.</span> <span class="nav-text">mv命令：移动文件，重命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir命令：创建新目录"><span class="nav-number">10.</span> <span class="nav-text">mkdir命令：创建新目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#man命令：查询指令的用法及参数"><span class="nav-number">11.</span> <span class="nav-text">man命令：查询指令的用法及参数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的分类"><span class="nav-number">1.</span> <span class="nav-text">线程的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程库"><span class="nav-number">2.</span> <span class="nav-text">线程库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户线程与内核线程的通信"><span class="nav-number">3.</span> <span class="nav-text">用户线程与内核线程的通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户线程与内核线程关系模型"><span class="nav-number">4.</span> <span class="nav-text">用户线程与内核线程关系模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">5.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">6.</span> <span class="nav-text">Q&A</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
